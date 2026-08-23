@@ -1,0 +1,416 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Where uploaded images are stored in the repo, and the path used in content.json
+media_folder: "uploads"
+public_folder: "/uploads"
+
+# Sheila edits everything through this single "West Sacramento Inclusive Sailing" entry.
+# Every field below maps directly to content.json — nothing here touches the site's code.
+collections:
+  - name: "content"
+    label: "Website Content"
+    files:
+      - file: "content.json"
+        label: "Site Content"
+        name: "site_content"
+        fields:
+          - label: "Organization"
+            name: "site"
+            widget: "object"
+            fields:
+              - { label: "Organization Name", name: "org_name", widget: "string" }
+              - { label: "Contact Email", name: "email", widget: "string" }
+              - label: "Navigation Menu"
+                name: "nav"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Link (leave as # sections)", name: "href", widget: "string" }
+
+          - label: "Home — Hero"
+            name: "hero"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Subheadline", name: "subhead", widget: "string" }
+              - { label: "Body Text", name: "body", widget: "text" }
+              - label: "Primary Button"
+                name: "cta_primary"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "text", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+              - label: "Secondary Button"
+                name: "cta_secondary"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "text", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+
+          - label: "Home — Feature Blocks"
+            name: "home_blocks"
+            widget: "list"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Body Text", name: "body", widget: "text" }
+              - label: "Button (optional)"
+                name: "cta"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Button Text", name: "text", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+              - label: "Primary Button (optional)"
+                name: "cta_primary"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Button Text", name: "text", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+              - label: "Secondary Button (optional)"
+                name: "cta_secondary"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Button Text", name: "text", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+
+          - label: "Sail Page"
+            name: "sail"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Subheadline", name: "subhead", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+              - label: "Adaptive Sailing Block"
+                name: "adaptive"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Getting Started Headline", name: "getting_started_headline", widget: "string" }
+                  - { label: "Getting Started Body", name: "getting_started_body", widget: "text" }
+                  - { label: "Requirements", name: "requirements", widget: "list" }
+                  - { label: "Closing Text", name: "closing", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+              - label: "Access Sailing Block"
+                name: "access"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+              - label: "Membership Block"
+                name: "membership"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Adaptive Sailor Note", name: "adaptive_note", widget: "text" }
+                  - { label: "Access Sailor Note", name: "access_note", widget: "text" }
+              - label: "Closing Block"
+                name: "closing"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+
+          - label: "FAQ Page"
+            name: "faq"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - label: "Questions"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Question", name: "question", widget: "string" }
+                  - { label: "Answer", name: "answer", widget: "text" }
+
+          - label: "About Page"
+            name: "about"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+              - label: "Mission"
+                name: "mission"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+              - label: "Founders"
+                name: "founders"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+              - label: "Board of Directors"
+                name: "board"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Intro", name: "intro", widget: "text" }
+                  - label: "Members"
+                    name: "members"
+                    widget: "list"
+                    fields:
+                      - { label: "Name", name: "name", widget: "string" }
+                      - { label: "Title", name: "title", widget: "string" }
+              - label: "Jim's Story"
+                name: "jims_story"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+
+          - label: "Support Page"
+            name: "support"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+              - label: "Intro Button"
+                name: "intro_cta"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "text", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+              - label: "Gift Impact"
+                name: "gift_impact"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Intro Line", name: "intro", widget: "string" }
+                  - { label: "Items Funded", name: "items", widget: "list" }
+                  - { label: "Closing Text", name: "closing", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+              - label: "Partnership"
+                name: "partner"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+              - label: "Closing"
+                name: "closing"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Lines", name: "lines", widget: "list" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - label: "Primary Button"
+                    name: "cta_primary"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+                  - label: "Secondary Button"
+                    name: "cta_secondary"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+
+          - label: "Donate Page"
+            name: "donate"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Subheadline", name: "subhead", widget: "string" }
+              - { label: "Intro Text", name: "intro", widget: "text" }
+              - { label: "PayPal Donate Link", name: "paypal_url", widget: "string", hint: "Paste your PayPal.me link or hosted donate button URL here — this powers every Donate button on the site." }
+              - label: "Individual Giving"
+                name: "individual"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Intro Line", name: "intro", widget: "string" }
+                  - label: "Giving Tiers"
+                    name: "tiers"
+                    widget: "list"
+                    fields:
+                      - { label: "Amount", name: "amount", widget: "string" }
+                      - { label: "Tier Name", name: "name", widget: "string" }
+                      - { label: "Description", name: "body", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link (leave blank to use PayPal link above)", name: "href", widget: "string", required: false }
+              - label: "Corporate Giving"
+                name: "corporate"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Intro Line", name: "intro", widget: "text" }
+                  - label: "Giving Tiers"
+                    name: "tiers"
+                    widget: "list"
+                    fields:
+                      - { label: "Amount", name: "amount", widget: "string" }
+                      - { label: "Tier Name", name: "name", widget: "string" }
+                      - { label: "Description", name: "body", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+              - label: "Major Gift"
+                name: "major_gift"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+              - label: "Give With Confidence"
+                name: "confidence"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "EIN", name: "ein", widget: "string", hint: "Format: XX-XXXXXXX" }
+                  - { label: "Closing Tagline", name: "tagline", widget: "string" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link (leave blank to use PayPal link above)", name: "href", widget: "string", required: false }
+
+          - label: "Contact Page"
+            name: "contact"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Body Text", name: "body", widget: "text" }
+              - { label: "Form Headline", name: "form_headline", widget: "string" }
+              - { label: "\"I'm interested in\" Options", name: "interest_options", widget: "list" }
+              - { label: "Submit Button Label", name: "submit_label", widget: "string" }
+              - label: "Ready to Sail Card"
+                name: "ready_to_sail"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+              - label: "Ready to Support Card"
+                name: "ready_to_support"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+
+          - label: "Legal & Cookie Notice"
+            name: "legal"
+            widget: "object"
+            fields:
+              - label: "Cookie Banner"
+                name: "cookie_banner"
+                widget: "object"
+                fields:
+                  - { label: "Heading", name: "heading", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Accept Button Label", name: "accept_label", widget: "string" }
+                  - { label: "Manage Preferences Button Label", name: "manage_label", widget: "string" }
+                  - { label: "Opt-Out Link Label", name: "optout_label", widget: "string" }
+              - label: "Consent Preferences Modal"
+                name: "consent_modal"
+                widget: "object"
+                fields:
+                  - { label: "Heading", name: "heading", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Checkbox Label", name: "checkbox_label", widget: "string" }
+                  - { label: "Cancel Button Label", name: "cancel_label", widget: "string" }
+                  - { label: "Save Button Label", name: "save_label", widget: "string" }
+              - { label: "Legal Page Headline", name: "page_headline", widget: "string" }
+              - label: "Privacy Policy"
+                name: "privacy_policy"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Intro", name: "intro", widget: "text" }
+                  - label: "Sections"
+                    name: "sections"
+                    widget: "list"
+                    fields:
+                      - { label: "Heading", name: "heading", widget: "string" }
+                      - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Closing Note", name: "closing", widget: "text" }
+              - label: "Disclaimer"
+                name: "disclaimer"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+              - label: "Accessibility Statement"
+                name: "accessibility_statement"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Body", name: "body", widget: "text" }
+
+          - label: "Footer"
+            name: "footer"
+            widget: "object"
+            fields:
+              - { label: "Organization Name", name: "org_name", widget: "string" }
+              - { label: "Tagline", name: "tagline", widget: "string" }
+              - { label: "Address", name: "address", widget: "string" }
+              - { label: "Phone", name: "phone", widget: "string", required: false, hint: "Leave blank to show 'TBD'" }
+              - { label: "Email", name: "email", widget: "string" }
+              - label: "Footer Navigation"
+                name: "nav"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+              - { label: "501(c)(3) Statement", name: "legal_statement", widget: "string" }
+              - { label: "Copyright Line", name: "copyright", widget: "string" }
+              - label: "Legal Links"
+                name: "legal_links"
+                widget: "list"
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "Link (leave as # if using the action below)", name: "href", widget: "string" }
+                  - { label: "Special Action (leave blank unless this is the cookie preferences link)", name: "action", widget: "string", required: false }
