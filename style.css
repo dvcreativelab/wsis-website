@@ -435,11 +435,12 @@ section { padding: var(--section-pad) 0; position: relative; }
 }
 .corporate-band .tier-card p { color: rgba(237,239,230,0.8); }
 .corporate-band .tier-card .amount { color: var(--brass); }
+.corporate-band .tier-card .name { color: var(--brass); }
 
 .ein-line {
   font-family: var(--font-mono);
   font-size: 0.85rem;
-  color: var(--brass-text);
+  color: var(--brass-dark);
   margin-top: 12px;
 }
 
@@ -541,13 +542,15 @@ section { padding: var(--section-pad) 0; position: relative; }
 /* ---------- Video gallery ---------- */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
   margin-top: 40px;
 }
 .video-card {
   position: relative;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 9 / 16;
+  max-width: 320px;
+  margin: 0 auto;
   background: var(--regatta-deep);
   overflow: hidden;
   cursor: pointer;
@@ -809,6 +812,13 @@ footer .tagline {
 .footer-line { margin-bottom: 4px; }
 .footer-line a { color: inherit; text-decoration: underline; text-decoration-color: rgba(237,239,230,0.3); }
 .footer-line a:hover { text-decoration-color: var(--brass); }
+
+.footer-social {
+  font-size: 0.85rem;
+  margin-top: 4px;
+}
+.footer-social a { color: var(--brass); text-decoration: none; }
+.footer-social a:hover { text-decoration: underline; }
 
 .footer-nav ul {
   list-style: none;

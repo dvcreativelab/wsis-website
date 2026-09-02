@@ -246,7 +246,7 @@
     "confidence": {
       "headline": "Give With Confidence.",
       "body": "West Sacramento Inclusive Sailing Foundation is recognized as a 501(c)(3) tax-exempt charitable organization. Contributions are tax-deductible to the extent permitted by law.",
-      "ein": "XX-XXXXXXX",
+      "ein": "93-1949129",
       "tagline": "Feel the wind. Take the helm. See how far you can go.",
       "cta": { "text": "Donate", "href": "" }
     }
@@ -338,6 +338,8 @@
       { "label": "Contact", "href": "contact.html" }
     ],
     "legal_statement": "West Sacramento Inclusive Sailing Foundation is a 501(c)(3) nonprofit organization.",
+    "instagram_handle": "@westsacinclusivesailing",
+    "instagram_url": "https://instagram.com/westsacinclusivesailing",
     "copyright": "\u00a9 2026 West Sacramento Inclusive Sailing Foundation. All rights reserved.",
     "legal_links": [
       { "label": "Privacy Policy", "href": "privacy-and-accessibility.html#privacy-policy" },

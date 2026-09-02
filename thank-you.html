@@ -50,6 +50,7 @@
     <div class="footer-legal">
       <p id="footer-legal-statement"></p>
       <p class="ein-line" id="footer-ein"></p>
+      <p class="footer-social" id="footer-instagram"></p>
     </div>
     <div class="footer-bottom">
       <div id="footer-copyright"></div>
@@ -69,6 +70,9 @@
     document.getElementById('footer-nav-links').innerHTML =
       footer.nav.map(n => `<li><a href="${n.href}">${n.label}</a></li>`).join('');
     document.getElementById('footer-legal-statement').textContent = footer.legal_statement;
+    if (footer.instagram_handle) {
+      document.getElementById('footer-instagram').innerHTML = `Instagram: <a href="${footer.instagram_url}" target="_blank" rel="noopener">${footer.instagram_handle}</a>`;
+    }
     document.getElementById('footer-ein').textContent = 'EIN: ' + content.donate.confidence.ein;
     document.getElementById('footer-copyright').textContent = footer.copyright;
     document.getElementById('footer-legal-links').innerHTML = footer.legal_links.map(l =>

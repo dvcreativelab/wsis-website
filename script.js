@@ -308,6 +308,11 @@ async function init() {
     setText('footer-ein', 'EIN: ' + content.donate.confidence.ein);
     setText('footer-copyright', footer.copyright);
 
+    const instaEl = document.getElementById('footer-instagram');
+    if (instaEl && footer.instagram_handle) {
+      instaEl.innerHTML = `Instagram: <a href="${footer.instagram_url}" target="_blank" rel="noopener">${footer.instagram_handle}</a>`;
+    }
+
     const legalLinks = document.getElementById('footer-legal-links');
     if (legalLinks) {
       legalLinks.innerHTML = footer.legal_links.map(l =>
