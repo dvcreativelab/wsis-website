@@ -127,6 +127,19 @@ collections:
                   - { label: "Headline", name: "headline", widget: "string" }
                   - { label: "Body", name: "body", widget: "text" }
 
+          - label: "Videos"
+            name: "videos"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Intro Line", name: "intro", widget: "string" }
+              - label: "Video List"
+                name: "list"
+                widget: "list"
+                fields:
+                  - { label: "Title / Caption", name: "title", widget: "string" }
+                  - { label: "Google Drive File ID", name: "drive_id", widget: "string", hint: "The long ID from the Drive share link, e.g. the part between /d/ and /view in https://drive.google.com/file/d/THIS_PART/view" }
+
           - label: "FAQ Page"
             name: "faq"
             widget: "object"
@@ -233,6 +246,17 @@ collections:
                     fields:
                       - { label: "Button Text", name: "text", widget: "string" }
                       - { label: "Link", name: "href", widget: "string" }
+              - label: "Sponsors"
+                name: "sponsors"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - label: "Sponsor List"
+                    name: "list"
+                    widget: "list"
+                    fields:
+                      - { label: "Name", name: "name", widget: "string" }
+                      - { label: "Logo Image", name: "logo", widget: "image", required: false, hint: "Upload a logo image. Leave blank to show the sponsor's name as text instead." }
 
           - label: "Donate Page"
             name: "donate"
@@ -241,7 +265,7 @@ collections:
               - { label: "Headline", name: "headline", widget: "string" }
               - { label: "Subheadline", name: "subhead", widget: "string" }
               - { label: "Intro Text", name: "intro", widget: "text" }
-              - { label: "PayPal Donate Link", name: "paypal_url", widget: "string", hint: "Paste your PayPal.me link or hosted donate button URL here — this powers every Donate button on the site." }
+              - { label: "Donate Link", name: "donate_url", widget: "string", hint: "Your Stripe checkout link (or any hosted donate/payment link). This one field powers every Donate button sitewide." }
               - label: "Individual Giving"
                 name: "individual"
                 widget: "object"
@@ -260,7 +284,7 @@ collections:
                     widget: "object"
                     fields:
                       - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link (leave blank to use PayPal link above)", name: "href", widget: "string", required: false }
+                      - { label: "Link (leave blank to use the Donate Link above)", name: "href", widget: "string", required: false }
               - label: "Corporate Giving"
                 name: "corporate"
                 widget: "object"
@@ -305,7 +329,7 @@ collections:
                     widget: "object"
                     fields:
                       - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link (leave blank to use PayPal link above)", name: "href", widget: "string", required: false }
+                      - { label: "Link (leave blank to use the Donate Link above)", name: "href", widget: "string", required: false }
 
           - label: "Contact Page"
             name: "contact"
