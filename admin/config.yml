@@ -55,6 +55,7 @@ collections:
             fields:
               - { label: "Headline", name: "headline", widget: "string" }
               - { label: "Body Text", name: "body", widget: "text" }
+              - { label: "Photo", name: "image", widget: "image", required: false }
               - label: "Button (optional)"
                 name: "cta"
                 widget: "object"
