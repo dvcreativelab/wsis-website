@@ -431,6 +431,8 @@ collections:
                   - { label: "Label", name: "label", widget: "string" }
                   - { label: "Link", name: "href", widget: "string" }
               - { label: "501(c)(3) Statement", name: "legal_statement", widget: "string" }
+              - { label: "Instagram Handle", name: "instagram_handle", widget: "string", required: false, hint: "e.g. @westsacinclusivesailing. Leave blank to hide from the footer." }
+              - { label: "Instagram URL", name: "instagram_url", widget: "string", required: false }
               - { label: "Copyright Line", name: "copyright", widget: "string" }
               - label: "Legal Links"
                 name: "legal_links"
