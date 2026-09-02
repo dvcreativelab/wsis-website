@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Privacy and Accessibility Policy — West Sacramento Inclusive Sailing Foundation</title>
+<title>Thank You — West Sacramento Inclusive Sailing Foundation</title>
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -17,31 +17,20 @@
   </div>
 </nav>
 
-<section class="on-white" style="padding-top:64px;">
-  <div class="container" style="max-width:820px;">
-    <span class="eyebrow">Legal</span>
-    <h2 id="page-headline"></h2>
-
-    <div class="legal-section" id="privacy-policy">
-      <h3 id="privacy-headline"></h3>
-      <p id="privacy-intro"></p>
-      <div id="privacy-sections"></div>
-      <p id="privacy-closing" style="margin-top:1.4em; font-size:0.9rem; color:rgba(22,35,43,0.6);"></p>
+<header class="hero">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--brass);">Message Sent</span>
+    <h1>Thanks for Reaching Out.</h1>
+    <p class="subhead">We'll be in touch soon.</p>
+    <div class="body">
+      <p>Your message has been received. Whether you're looking to get on the water, volunteer, or support the mission, someone from West Sacramento Inclusive Sailing Foundation will follow up with you shortly.</p>
     </div>
-
-    <div class="legal-section" id="disclaimer">
-      <h3 id="disclaimer-headline"></h3>
-      <div id="disclaimer-body"></div>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="index.html">Back to Home</a>
+      <a class="btn btn-outline" href="sail.html">Explore Sailing</a>
     </div>
-
-    <div class="legal-section" id="accessibility-statement">
-      <h3 id="accessibility-headline"></h3>
-      <div id="accessibility-body"></div>
-    </div>
-
-    <p style="margin-top:48px;"><a href="index.html">&larr; Back to home</a></p>
   </div>
-</section>
+</header>
 
 <footer>
   <div class="container">
@@ -71,32 +60,6 @@
 
 <script>
   fetch('content.json').then(r => r.json()).then(content => {
-    const legal = content.legal;
-
-    document.getElementById('page-headline').textContent = legal.page_headline;
-
-    // Privacy policy
-    document.getElementById('privacy-headline').textContent = legal.privacy_policy.headline;
-    document.getElementById('privacy-intro').textContent = legal.privacy_policy.intro;
-    document.getElementById('privacy-sections').innerHTML = legal.privacy_policy.sections.map(s => `
-      <div class="legal-subsection">
-        <h4>${s.heading}</h4>
-        ${s.body.split('\n\n').map(p => `<p>${p}</p>`).join('')}
-      </div>
-    `).join('');
-    document.getElementById('privacy-closing').textContent = legal.privacy_policy.closing;
-
-    // Disclaimer
-    document.getElementById('disclaimer-headline').textContent = legal.disclaimer.headline;
-    document.getElementById('disclaimer-body').innerHTML =
-      legal.disclaimer.body.split('\n\n').map(p => `<p>${p}</p>`).join('');
-
-    // Accessibility
-    document.getElementById('accessibility-headline').textContent = legal.accessibility_statement.headline;
-    document.getElementById('accessibility-body').innerHTML =
-      legal.accessibility_statement.body.split('\n\n').map(p => `<p>${p}</p>`).join('');
-
-    // Footer (mirrors index.html)
     const footer = content.footer;
     document.getElementById('footer-org-name').textContent = footer.org_name;
     document.getElementById('footer-tagline').textContent = footer.tagline;
@@ -105,14 +68,12 @@
     document.getElementById('footer-email').innerHTML = `<a href="mailto:${footer.email}">${footer.email}</a>`;
     document.getElementById('footer-nav-links').innerHTML =
       footer.nav.map(n => `<li><a href="${n.href}">${n.label}</a></li>`).join('');
-    document.getElementById('footer-legal-statement').textContent = legal_statement_fallback(footer);
+    document.getElementById('footer-legal-statement').textContent = footer.legal_statement;
     document.getElementById('footer-ein').textContent = 'EIN: ' + content.donate.confidence.ein;
     document.getElementById('footer-copyright').textContent = footer.copyright;
     document.getElementById('footer-legal-links').innerHTML = footer.legal_links.map(l =>
       l.action ? `<a href="#" data-action="${l.action}">${l.label}</a>` : `<a href="${l.href}">${l.label}</a>`
     ).join('');
-
-    function legal_statement_fallback(f) { return f.legal_statement; }
   });
 </script>
 <script src="cookie-consent.js"></script>

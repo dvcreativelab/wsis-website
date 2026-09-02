@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — West Sacramento Inclusive Sailing Foundation</title>
+<meta name="description" content="Get in touch with West Sacramento Inclusive Sailing Foundation to sail, volunteer, donate, or ask a question.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-stack-light.svg" alt="West Sacramento Inclusive Sailing Foundation" class="brand-logo">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <ul class="nav-links" id="navLinks"></ul>
+  </div>
+</nav>
+
+<section id="contact" class="on-white" style="padding-top:64px;">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Get In Touch</span>
+      <h2 id="contact-headline"></h2>
+      <div id="contact-body"></div>
+    </div>
+
+    <div class="contact-grid">
+      <div>
+        <h3 id="contact-form-headline"></h3>
+        <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/thank-you.html">
+          <input type="hidden" name="form-name" value="contact">
+          <p class="visually-hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
+          <div class="field">
+            <label for="cf-name">Name</label>
+            <input id="cf-name" name="name" type="text" required>
+          </div>
+          <div class="field">
+            <label for="cf-email">Email</label>
+            <input id="cf-email" name="email" type="email" required>
+          </div>
+          <div class="field">
+            <label for="cf-phone">Phone (optional)</label>
+            <input id="cf-phone" name="phone" type="tel">
+          </div>
+          <div class="field">
+            <label for="cf-interest">I'm interested in</label>
+            <select id="cf-interest" name="interest"></select>
+          </div>
+          <div class="field">
+            <label for="cf-message">Message</label>
+            <textarea id="cf-message" name="message" required></textarea>
+          </div>
+          <div class="cta-row">
+            <button class="btn btn-primary" type="submit" id="contact-submit"></button>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <div class="next-step-card">
+          <h3 id="contact-sail-headline"></h3>
+          <p id="contact-sail-body"></p>
+          <a class="btn btn-outline on-light" id="contact-sail-cta" href="#"></a>
+        </div>
+        <div class="next-step-card">
+          <h3 id="contact-support-headline"></h3>
+          <p id="contact-support-body"></p>
+          <a class="btn btn-outline on-light" id="contact-support-cta" href="#"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo-stack-light.svg" alt="" aria-hidden="true" class="footer-logo">
+        <div id="footer-org-name" class="footer-org-name"></div>
+        <div class="tagline" id="footer-tagline"></div>
+        <div id="footer-address" class="footer-line"></div>
+        <div id="footer-phone" class="footer-line"></div>
+        <div id="footer-email" class="footer-line"></div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <ul id="footer-nav-links"></ul>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p id="footer-legal-statement"></p>
+      <p class="ein-line" id="footer-ein"></p>
+    </div>
+    <div class="footer-bottom">
+      <div id="footer-copyright"></div>
+      <div class="footer-legal-links" id="footer-legal-links"></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="cookie-consent.js"></script>
+</body>
+</html>

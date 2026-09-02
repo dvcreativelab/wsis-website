@@ -2,21 +2,38 @@
    West Sacramento Inclusive Sailing Foundation
    Design tokens
    =========================================================== */
+
+@font-face {
+  font-family: "DejaVu Sans";
+  src: url('assets/fonts/DejaVuSans-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "DejaVu Sans";
+  src: url('assets/fonts/DejaVuSans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --ink: #16232B;
-  --regatta: #0F3A4D;
-  --regatta-deep: #0A2836;
-  --open-water: #1C6E8C;
+  --regatta: #08253F;
+  --regatta-deep: #051622;
+  --river-teal: #15747C;
+  --open-water: #078D87;
   --canvas: #EDEFE6;
   --canvas-warm: #E4E7D9;
   --white: #FFFFFF;
-  --brass: #C98A3E;
-  --brass-dark: #A56E2C;
+  --brass: #F4A32E;
+  --brass-dark: #C97F1A;
   --signal: #C1443C;
 
-  --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
-  --font-body: "Work Sans", -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --font-display: "DejaVu Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "DejaVu Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "DejaVu Sans", -apple-system, BlinkMacSystemFont, sans-serif;
 
   --container: 1180px;
   --section-pad: clamp(64px, 9vw, 128px);
@@ -69,7 +86,7 @@ p:last-child { margin-bottom: 0; }
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.78rem;
-  color: var(--brass-dark);
+  color: var(--river-teal);
   display: inline-block;
   margin-bottom: 0.8em;
 }
@@ -149,13 +166,14 @@ p:last-child { margin-bottom: 0; }
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: var(--font-display);
-  text-transform: uppercase;
-  letter-spacing: 0.02em;
-  font-size: 1.1rem;
   text-decoration: none;
   color: var(--canvas);
   white-space: nowrap;
+}
+.brand-logo {
+  height: 52px;
+  width: auto;
+  display: block;
 }
 .nav-links {
   display: flex;
@@ -189,6 +207,9 @@ p:last-child { margin-bottom: 0; }
   color: var(--canvas);
   font-size: 1.6rem;
   cursor: pointer;
+  padding: 10px;
+  margin: -10px -10px -10px 0;
+  line-height: 1;
 }
 
 @media (max-width: 860px) {
@@ -200,15 +221,27 @@ p:last-child { margin-bottom: 0; }
     padding: 12px 32px 32px;
     transform: translateY(-110%);
     transition: transform 0.25s ease;
+    overflow-y: auto;
   }
   .nav-links.open { transform: translateY(0); }
   .nav-links a { padding: 16px 0; font-size: 1rem; border-bottom: 1px solid rgba(237,239,230,0.12); }
   .nav-toggle { display: block; }
 }
 
+@media (max-width: 480px) {
+  .container { padding: 0 20px; }
+  .brand-logo { height: 40px; }
+  .site-nav .container { height: 64px; }
+  .nav-links { inset: 64px 0 0 0; }
+  .cta-row { gap: 12px; }
+  .cta-row .btn { flex: 1 1 auto; text-align: center; }
+}
+
 /* ---------- Hero ---------- */
 .hero {
-  background: linear-gradient(180deg, var(--regatta) 0%, var(--regatta-deep) 100%);
+  background:
+    linear-gradient(180deg, rgba(8,37,63,0.78) 0%, rgba(5,22,34,0.88) 100%),
+    url('assets/hero-sail.jpg') center 35% / cover no-repeat;
   color: var(--canvas);
   padding: clamp(72px, 12vw, 140px) 0 clamp(90px, 10vw, 130px);
   position: relative;
@@ -256,7 +289,7 @@ section { padding: var(--section-pad) 0; position: relative; }
 .block:nth-of-type(even) .side { order: 2; text-align: right; }
 .block:nth-of-type(even) .main { order: 1; margin-left: auto; }
 
-@media (max-width: 760px) {
+@media (max-width: 860px) {
   .block { grid-template-columns: 1fr; gap: 20px; }
   .block:nth-of-type(even) .side,
   .block:nth-of-type(even) .main { order: initial; text-align: left; margin-left: 0; }
@@ -363,7 +396,7 @@ section { padding: var(--section-pad) 0; position: relative; }
 .tier-card p { color: rgba(22,35,43,0.75); font-size: 0.95rem; flex-grow: 1; }
 
 .corporate-band {
-  background: var(--regatta-deep);
+  background: linear-gradient(160deg, var(--regatta) 0%, var(--river-teal) 130%);
   color: var(--canvas);
   padding: var(--section-pad) 0;
 }
@@ -423,6 +456,133 @@ section { padding: var(--section-pad) 0; position: relative; }
   color: rgba(22,35,43,0.78);
 }
 
+/* ---------- Photo sections ---------- */
+.photo-banner {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+  display: block;
+}
+.photo-banner-wrap { position: relative; }
+.photo-caption {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: rgba(22,35,43,0.55);
+  text-align: center;
+  padding: 12px 0 0;
+}
+.section-dark .photo-caption { color: rgba(237,239,230,0.6); }
+
+.photo-duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin: 40px 0;
+}
+.photo-duo img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 640px) {
+  .photo-duo { grid-template-columns: 1fr; }
+  .photo-duo img { height: 260px; }
+}
+
+.photo-framed {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+  border: 6px solid var(--white);
+  box-shadow: 0 8px 30px rgba(8,37,63,0.18);
+}
+.photo-framed-wrap { text-align: center; margin: 16px 0 8px; }
+
+/* ---------- Video gallery ---------- */
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  margin-top: 40px;
+}
+.video-card {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: var(--regatta-deep);
+  overflow: hidden;
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  display: block;
+  width: 100%;
+}
+.video-card iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+}
+.video-card-poster {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(160deg, var(--regatta) 0%, var(--regatta-deep) 100%);
+  color: var(--canvas);
+  transition: filter 0.15s ease;
+}
+.video-card:hover .video-card-poster { filter: brightness(1.15); }
+.video-play-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--brass);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.video-play-icon svg { width: 20px; height: 20px; }
+.video-card-title {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0 16px;
+  text-align: center;
+}
+
+/* ---------- Sponsors ---------- */
+.sponsor-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 32px;
+}
+.sponsor-logo {
+  max-height: 56px;
+  max-width: 180px;
+  width: auto;
+  object-fit: contain;
+}
+.sponsor-wordmark {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  color: rgba(22,35,43,0.55);
+  border: 1px solid rgba(22,35,43,0.15);
+  padding: 14px 24px;
+}
+
 /* ---------- Contact ---------- */
 .contact-grid {
   display: grid;
@@ -441,6 +601,7 @@ form.contact-form { display: flex; flex-direction: column; gap: 18px; margin-top
   color: var(--regatta);
 }
 .field input, .field textarea, .field select {
+  width: 100%;
   font-family: var(--font-body);
   font-size: 1rem;
   padding: 12px 14px;
@@ -503,7 +664,6 @@ form.contact-form { display: flex; flex-direction: column; gap: 18px; margin-top
   inset: 0;
   background: rgba(10,40,54,0.7);
   z-index: 300;
-  display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
@@ -534,8 +694,11 @@ form.contact-form { display: flex; flex-direction: column; gap: 18px; margin-top
 
 @media (max-width: 640px) {
   .cookie-banner { padding: 18px 20px; }
+  .cookie-banner-actions { width: 100%; }
+  .cookie-banner-actions .btn { flex: 1; text-align: center; }
   .cookie-modal-actions { justify-content: stretch; }
   .cookie-modal-actions .btn { flex: 1; text-align: center; }
+  .cookie-modal { padding: 24px 20px; max-height: 85vh; overflow-y: auto; }
 }
 
 /* ---------- Legal page ---------- */
@@ -575,6 +738,11 @@ footer {
   font-size: 1.3rem;
   color: var(--white);
   margin-bottom: 6px;
+}
+.footer-logo {
+  height: 64px;
+  width: auto;
+  margin-bottom: 16px;
 }
 footer .tagline {
   font-family: var(--font-mono);
@@ -620,9 +788,14 @@ footer .tagline {
   gap: 12px;
   font-size: 0.82rem;
 }
-.footer-legal-links { display: flex; gap: 18px; }
+.footer-legal-links { display: flex; gap: 18px; flex-wrap: wrap; }
 .footer-legal-links a { color: inherit; text-decoration: underline; text-decoration-color: rgba(237,239,230,0.3); }
 .footer-legal-links a:hover { text-decoration-color: var(--brass); }
+
+@media (max-width: 520px) {
+  .footer-bottom { flex-direction: column; align-items: flex-start; }
+  .footer-legal-links { gap: 12px 16px; }
+}
 
 /* ---------- Utility ---------- */
 .visually-hidden {

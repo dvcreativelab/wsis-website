@@ -15,11 +15,11 @@ function setHTML(id, value) {
     .join('');
 }
 
-function setLink(id, cta) {
+function setLink(id, cta, fallbackHref) {
   const el = document.getElementById(id);
   if (!el || !cta) return;
   el.textContent = cta.text || '';
-  el.href = cta.href || '#';
+  el.href = cta.href || fallbackHref || '#';
 }
 
 function flagSVG(color) {
@@ -50,7 +50,6 @@ async function init() {
   }
 
   // Nav
-  document.getElementById('nav-org-name').textContent = content.site.org_name.replace(' Foundation', '');
   const navLinks = document.getElementById('navLinks');
   navLinks.innerHTML = content.site.nav.map(n => `<li><a href="${n.href}">${n.label}</a></li>`).join('');
 
@@ -64,41 +63,35 @@ async function init() {
     navToggle.setAttribute('aria-expanded', 'false');
   }));
 
-  // Scroll-spy active nav link
-  const sections = ['home','sail','faq','about','support','donate','contact']
-    .map(id => document.getElementById(id)).filter(Boolean);
-  const linkMap = {};
-  navLinks.querySelectorAll('a').forEach(a => linkMap[a.getAttribute('href')] = a);
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        Object.values(linkMap).forEach(a => a.classList.remove('active'));
-        const link = linkMap['#' + entry.target.id];
-        if (link) link.classList.add('active');
-      }
-    });
-  }, { rootMargin: '-40% 0px -55% 0px' });
-  sections.forEach(s => observer.observe(s));
+  // Highlight the nav link matching the current page
+  const currentPage = location.pathname.split('/').pop() || 'index.html';
+  navLinks.querySelectorAll('a').forEach(a => {
+    if (a.getAttribute('href') === currentPage) a.classList.add('active');
+  });
+
+  // Single source of truth for every "Donate"/"Make a Gift" button sitewide.
+  // Any CTA in content.json with a blank href automatically uses this link.
+  const donateUrl = content.donate.donate_url;
 
   // Hero
   setText('hero-headline', content.hero.headline);
   setText('hero-subhead', content.hero.subhead);
   setHTML('hero-body', content.hero.body);
   setLink('hero-cta-primary', content.hero.cta_primary);
-  setLink('hero-cta-secondary', content.hero.cta_secondary);
+  setLink('hero-cta-secondary', content.hero.cta_secondary, donateUrl);
 
   // Home blocks
   const hbContainer = document.getElementById('home-blocks-container');
   hbContainer.innerHTML = content.home_blocks.map(b => {
     const ctaHTML = b.cta
-      ? `<div class="cta-row"><a class="btn btn-primary" href="${b.cta.href}">${b.cta.text}</a></div>`
+      ? `<div class="cta-row"><a class="btn btn-primary" href="${b.cta.href || donateUrl}">${b.cta.text}</a></div>`
       : (b.cta_primary ? `<div class="cta-row">
-          <a class="btn btn-primary" href="${b.cta_primary.href}">${b.cta_primary.text}</a>
+          <a class="btn btn-primary" href="${b.cta_primary.href || donateUrl}">${b.cta_primary.text}</a>
           ${b.cta_secondary ? `<a class="btn btn-outline on-light" href="${b.cta_secondary.href}">${b.cta_secondary.text}</a>` : ''}
         </div>` : '');
     return `
       <div class="block">
-        <div class="side"><span class="telltale" aria-hidden="true"><svg viewBox="0 0 44 14"><path d="M2,7 Q12,2 22,7 T42,7" stroke="#1C6E8C" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span></div>
+        <div class="side"><span class="telltale" aria-hidden="true"><svg viewBox="0 0 44 14"><path d="M2,7 Q12,2 22,7 T42,7" stroke="#078D87" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span></div>
         <div class="main">
           <h3>${b.headline}</h3>
           ${b.body.split('\n\n').map(p => `<p>${p}</p>`).join('')}
@@ -134,6 +127,28 @@ async function init() {
   setText('sail-closing-headline', sail.closing.headline);
   setHTML('sail-closing-body', sail.closing.body);
 
+  // Videos (click-to-play, so nothing loads until a visitor actually clicks)
+  if (content.videos && document.getElementById('video-grid')) {
+    setText('videos-headline', content.videos.headline);
+    setText('videos-intro', content.videos.intro);
+    document.getElementById('video-grid').innerHTML = content.videos.list.map((v, i) => `
+      <button class="video-card" type="button" data-drive-id="${v.drive_id}" aria-label="Play: ${v.title}">
+        <span class="video-card-poster">
+          <span class="video-play-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="#051622"><path d="M8 5v14l11-7z"/></svg>
+          </span>
+          <span class="video-card-title">${v.title}</span>
+        </span>
+      </button>
+    `).join('');
+    document.getElementById('video-grid').addEventListener('click', (e) => {
+      const card = e.target.closest('.video-card');
+      if (!card) return;
+      const id = card.getAttribute('data-drive-id');
+      card.outerHTML = `<div class="video-card"><iframe src="https://drive.google.com/file/d/${id}/preview" allow="autoplay" allowfullscreen></iframe></div>`;
+    });
+  }
+
   // FAQ
   setText('faq-headline', content.faq.headline);
   document.getElementById('faq-list').innerHTML = content.faq.items.map(item => `
@@ -167,14 +182,14 @@ async function init() {
   const support = content.support;
   setText('support-headline', support.headline);
   setHTML('support-intro', support.intro);
-  setLink('support-intro-cta', support.intro_cta);
+  setLink('support-intro-cta', support.intro_cta, donateUrl);
 
   setText('support-gift-headline', support.gift_impact.headline);
   setText('support-gift-intro', support.gift_impact.intro);
   document.getElementById('support-gift-items').innerHTML =
     support.gift_impact.items.map(i => `<li>${i}</li>`).join('');
   setText('support-gift-closing', support.gift_impact.closing);
-  setLink('support-gift-cta', support.gift_impact.cta);
+  setLink('support-gift-cta', support.gift_impact.cta, donateUrl);
 
   setText('support-partner-headline', support.partner.headline);
   setHTML('support-partner-body', support.partner.body);
@@ -184,24 +199,33 @@ async function init() {
   document.getElementById('support-closing-lines').innerHTML =
     support.closing.lines.map(l => `<div>${l}</div>`).join('');
   setText('support-closing-body', support.closing.body);
-  setLink('support-closing-cta-primary', support.closing.cta_primary);
+  setLink('support-closing-cta-primary', support.closing.cta_primary, donateUrl);
   setLink('support-closing-cta-secondary', support.closing.cta_secondary);
+
+  // Support sponsors
+  if (support.sponsors) {
+    setText('support-sponsors-headline', support.sponsors.headline);
+    document.getElementById('support-sponsors-grid').innerHTML =
+      support.sponsors.list.map(s => s.logo
+        ? `<img src="${s.logo}" alt="${s.name}" class="sponsor-logo">`
+        : `<div class="sponsor-wordmark">${s.name}</div>`
+      ).join('');
+  }
 
   // Donate
   const donate = content.donate;
-  const paypalUrl = donate.paypal_url;
   setText('donate-headline', donate.headline);
   setText('donate-subhead', donate.subhead);
   setHTML('donate-intro', donate.intro);
 
   setText('donate-individual-headline', donate.individual.headline);
   setText('donate-individual-intro', donate.individual.intro);
-  renderTiers('donate-individual-tiers', donate.individual.tiers, '#1C6E8C');
-  setLink('donate-individual-cta', { text: donate.individual.cta.text, href: paypalUrl });
+  renderTiers('donate-individual-tiers', donate.individual.tiers, '#078D87');
+  setLink('donate-individual-cta', donate.individual.cta, donateUrl);
 
   setText('donate-corporate-headline', donate.corporate.headline);
   setText('donate-corporate-intro', donate.corporate.intro);
-  renderTiers('donate-corporate-tiers', donate.corporate.tiers, '#C98A3E');
+  renderTiers('donate-corporate-tiers', donate.corporate.tiers, '#F4A32E');
   setLink('donate-corporate-cta', donate.corporate.cta);
 
   setText('donate-major-headline', donate.major_gift.headline);
@@ -212,7 +236,7 @@ async function init() {
   setText('donate-confidence-body', donate.confidence.body);
   setText('donate-confidence-ein', 'EIN: ' + donate.confidence.ein);
   setText('donate-confidence-tagline', donate.confidence.tagline);
-  setLink('donate-confidence-cta', { text: donate.confidence.cta.text, href: paypalUrl });
+  setLink('donate-confidence-cta', donate.confidence.cta, donateUrl);
 
   // Contact
   const contact = content.contact;

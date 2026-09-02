@@ -28,7 +28,7 @@ function buildConsentUI(legal) {
       <button class="cookie-optout-link" id="cookieOptOutLink" type="button">${legal.cookie_banner.optout_label}</button>
     </div>
 
-    <div class="cookie-modal-overlay" id="cookieModalOverlay" hidden>
+    <div class="cookie-modal-overlay" id="cookieModalOverlay" style="display:none;">
       <div class="cookie-modal" role="dialog" aria-modal="true" aria-labelledby="cookieModalHeading">
         <h3 id="cookieModalHeading">${legal.consent_modal.heading}</h3>
         <p>${legal.consent_modal.body}</p>
@@ -51,9 +51,9 @@ function buildConsentUI(legal) {
 
   function openModal() {
     checkbox.checked = getCookieConsent() === 'optout';
-    overlay.hidden = false;
+    overlay.style.display = 'flex';
   }
-  function closeModal() { overlay.hidden = true; }
+  function closeModal() { overlay.style.display = 'none'; }
 
   const existing = getCookieConsent();
   if (existing === 'accepted' || existing === 'optout') {

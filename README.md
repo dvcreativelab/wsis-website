@@ -5,9 +5,13 @@ and images herself without touching code.
 
 ## How it's built
 
-- `index.html` / `style.css` / `script.js` — the page itself (don't need to be touched again)
+- `index.html` — Home page. `sail.html`, `faq.html`, `about.html`, `support.html`, `donate.html`, `contact.html` — each their own page now, reached via the top nav
+- `privacy-and-accessibility.html` — legal page. `thank-you.html` — shown after a contact form submission
+- `style.css` / `script.js` / `cookie-consent.js` — shared across every page (don't need to be touched again)
 - `content.json` — **every piece of text and every button link on the site.** This is the file the CMS edits.
 - `admin/` — the login + editing screen (Decap CMS), lives at `yoursite.com/admin`
+- `assets/` — logo, favicon, and site photos
+- `uploads/` — sponsor logos and anything Sheila uploads through the CMS going forward
 
 Sheila never opens the files above — she logs into `/admin`, sees a form
 with labeled fields ("Hero Headline," "Donate Button Text," etc.), edits,

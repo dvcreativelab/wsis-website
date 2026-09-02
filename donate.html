@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Donate — West Sacramento Inclusive Sailing Foundation</title>
+<meta name="description" content="Give to West Sacramento Inclusive Sailing Foundation, a 501(c)(3) nonprofit bringing inclusive sailing to Northern California.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-stack-light.svg" alt="West Sacramento Inclusive Sailing Foundation" class="brand-logo">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <ul class="nav-links" id="navLinks"></ul>
+  </div>
+</nav>
+
+<section id="donate" class="on-white" style="padding-top:64px;">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">501(c)(3) Nonprofit</span>
+      <h2 id="donate-headline"></h2>
+      <p class="subhead" id="donate-subhead" style="color:var(--open-water); font-family:var(--font-mono); font-size:1rem;"></p>
+      <div id="donate-intro"></div>
+    </div>
+
+    <h3 id="donate-individual-headline"></h3>
+    <p id="donate-individual-intro"></p>
+    <div class="tier-grid" id="donate-individual-tiers"></div>
+    <div class="cta-row"><a class="btn btn-primary" id="donate-individual-cta" href="#"></a></div>
+  </div>
+</section>
+
+<section class="corporate-band">
+  <div class="container">
+    <span class="eyebrow" style="color:var(--brass);">Corporate Giving</span>
+    <h2 id="donate-corporate-headline"></h2>
+    <p id="donate-corporate-intro"></p>
+    <div class="tier-grid" id="donate-corporate-tiers"></div>
+    <div class="cta-row"><a class="btn btn-primary" id="donate-corporate-cta" href="#"></a></div>
+  </div>
+</section>
+
+<section class="on-white">
+  <div class="container">
+    <div class="block">
+      <div class="side">Major Gifts</div>
+      <div class="main">
+        <h3 id="donate-major-headline"></h3>
+        <div id="donate-major-body"></div>
+        <div class="cta-row"><a class="btn btn-primary" id="donate-major-cta" href="#"></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark">
+  <div class="container" style="text-align:center; max-width:700px;">
+    <h3 id="donate-confidence-headline" style="text-transform:uppercase; font-family:var(--font-display);"></h3>
+    <p id="donate-confidence-body"></p>
+    <p class="ein-line" id="donate-confidence-ein"></p>
+    <p style="margin-top:1.4em; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:0.06em; color:var(--brass);" id="donate-confidence-tagline"></p>
+    <div class="cta-row" style="justify-content:center;"><a class="btn btn-primary" id="donate-confidence-cta" href="#"></a></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo-stack-light.svg" alt="" aria-hidden="true" class="footer-logo">
+        <div id="footer-org-name" class="footer-org-name"></div>
+        <div class="tagline" id="footer-tagline"></div>
+        <div id="footer-address" class="footer-line"></div>
+        <div id="footer-phone" class="footer-line"></div>
+        <div id="footer-email" class="footer-line"></div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <ul id="footer-nav-links"></ul>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p id="footer-legal-statement"></p>
+      <p class="ein-line" id="footer-ein"></p>
+    </div>
+    <div class="footer-bottom">
+      <div id="footer-copyright"></div>
+      <div class="footer-legal-links" id="footer-legal-links"></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="cookie-consent.js"></script>
+</body>
+</html>

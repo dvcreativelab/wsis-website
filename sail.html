@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sail With Us — West Sacramento Inclusive Sailing Foundation</title>
+<meta name="description" content="Adaptive sailing and access to sailing at West Sacramento Inclusive Sailing Foundation — for sailors of all abilities and backgrounds.">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <a href="index.html" class="brand">
+      <img src="assets/logo-stack-light.svg" alt="West Sacramento Inclusive Sailing Foundation" class="brand-logo">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">&#9776;</button>
+    <ul class="nav-links" id="navLinks"></ul>
+  </div>
+</nav>
+
+<section id="sail" style="padding-top:64px;">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Get Involved</span>
+      <h2 id="sail-headline"></h2>
+      <p class="subhead" id="sail-subhead" style="color:var(--open-water); font-family:var(--font-mono); font-size:1rem;"></p>
+      <p id="sail-intro"></p>
+    </div>
+
+    <div class="block">
+      <div class="side"><span class="telltale" aria-hidden="true"><svg viewBox="0 0 44 14"><path d="M2,7 Q12,2 22,7 T42,7" stroke="#078D87" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>Program</div>
+      <div class="main">
+        <h3 id="sail-adaptive-headline"></h3>
+        <p id="sail-adaptive-body"></p>
+        <h3 id="sail-adaptive-gs-headline" style="margin-top:1.4em;"></h3>
+        <p id="sail-adaptive-gs-body"></p>
+        <ul class="req-list" id="sail-adaptive-requirements"></ul>
+        <p id="sail-adaptive-closing"></p>
+        <div class="cta-row"><a class="btn btn-primary" id="sail-adaptive-cta" href="#"></a></div>
+      </div>
+    </div>
+
+    <div class="photo-duo">
+      <img src="assets/adaptive-boarding.jpg" alt="A sailor transferring into an adaptive sailboat with the help of a support person at the dock">
+      <img src="assets/adaptive-cockpit.jpg" alt="Two sailors seated in the cockpit of an adaptive sailboat, geared up and ready to sail">
+    </div>
+
+    <div class="block">
+      <div class="side"><span class="telltale" aria-hidden="true"><svg viewBox="0 0 44 14"><path d="M2,7 Q12,2 22,7 T42,7" stroke="#078D87" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>Access</div>
+      <div class="main">
+        <h3 id="sail-access-headline"></h3>
+        <div id="sail-access-body"></div>
+        <div class="cta-row"><a class="btn btn-primary" id="sail-access-cta" href="#"></a></div>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="side"><span class="telltale" aria-hidden="true"><svg viewBox="0 0 44 14"><path d="M2,7 Q12,2 22,7 T42,7" stroke="#078D87" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>Membership</div>
+      <div class="main">
+        <h3 id="sail-membership-headline"></h3>
+        <p id="sail-membership-body"></p>
+        <p id="sail-membership-adaptive-note"></p>
+        <p id="sail-membership-access-note"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="on-white">
+  <div class="container">
+    <div class="photo-banner-wrap">
+      <img src="assets/dock-prep.jpg" alt="A group of sailors and volunteers preparing sailboats together at the dock" class="photo-banner">
+      <p class="photo-caption">Getting ready is part of the community.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section-dark">
+  <div class="container">
+    <div class="section-head">
+      <h2 id="sail-closing-headline"></h2>
+      <div id="sail-closing-body"></div>
+    </div>
+  </div>
+</section>
+
+<section class="on-white">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Watch</span>
+      <h2 id="videos-headline"></h2>
+      <p id="videos-intro"></p>
+    </div>
+    <div class="video-grid" id="video-grid"></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo-stack-light.svg" alt="" aria-hidden="true" class="footer-logo">
+        <div id="footer-org-name" class="footer-org-name"></div>
+        <div class="tagline" id="footer-tagline"></div>
+        <div id="footer-address" class="footer-line"></div>
+        <div id="footer-phone" class="footer-line"></div>
+        <div id="footer-email" class="footer-line"></div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <ul id="footer-nav-links"></ul>
+      </nav>
+    </div>
+    <div class="footer-legal">
+      <p id="footer-legal-statement"></p>
+      <p class="ein-line" id="footer-ein"></p>
+    </div>
+    <div class="footer-bottom">
+      <div id="footer-copyright"></div>
+      <div class="footer-legal-links" id="footer-legal-links"></div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script src="cookie-consent.js"></script>
+</body>
+</html>
