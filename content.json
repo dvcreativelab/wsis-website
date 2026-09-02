@@ -25,16 +25,19 @@
     {
       "headline": "Feel the Wind Differently.",
       "body": "There's something powerful about taking the helm of a sailboat.\n\nYou're not simply along for the ride. You're reading the wind, making decisions, controlling the boat, and discovering what you're capable of.\n\nOur adaptive sailboats and individualized support help sailors of different abilities participate safely and actively in the sport.\n\nThis is sailing. And you can do it.",
+      "image": "assets/adaptive-cockpit.jpg",
       "cta": { "text": "Get on the Water", "href": "sail.html" }
     },
     {
       "headline": "Your First Sail Could Be Just the Beginning.",
       "body": "Come experience sailing for the first time. Learn to sail independently. Build your skills. Learn to race.\n\nFor sailors who want to compete, the opportunities can extend from Northern California to regattas around the world.\n\nYou decide how far you want to go.",
+      "image": "assets/dinghy-smiles.jpg",
       "cta": { "text": "Sail With Us", "href": "sail.html" }
     },
     {
       "headline": "Help Put More People at the Helm.",
       "body": "Access to sailing takes the right boats, adaptive equipment, skilled instruction, trained support, and a commitment to safety.\n\nDonors and corporate partners make that possible.\n\nYour support gives more people the opportunity to experience the wind, take control of a sailboat, and discover a sport they may never have imagined was open to them.",
+      "image": "assets/dock-prep.jpg",
       "cta_primary": { "text": "Donate", "href": "" },
       "cta_secondary": { "text": "Become a Corporate Partner", "href": "support.html" }
     }
