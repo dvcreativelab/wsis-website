@@ -248,6 +248,7 @@ p:last-child { margin-bottom: 0; }
   .nav-links { inset: 64px 0 0 0; }
   .cta-row { gap: 12px; }
   .cta-row .btn { flex: 1 1 auto; text-align: center; }
+  .video-grid { grid-template-columns: 1fr; }
 }
 
 /* ---------- Hero ---------- */
@@ -542,15 +543,13 @@ section { padding: var(--section-pad) 0; position: relative; }
 /* ---------- Video gallery ---------- */
 .video-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px;
   margin-top: 40px;
 }
 .video-card {
   position: relative;
-  aspect-ratio: 9 / 16;
-  max-width: 320px;
-  margin: 0 auto;
+  aspect-ratio: 16 / 9;
   background: var(--regatta-deep);
   overflow: hidden;
   cursor: pointer;
