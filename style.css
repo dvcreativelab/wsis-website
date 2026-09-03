@@ -274,7 +274,7 @@ p:last-child { margin-bottom: 0; }
 @media (min-width: 861px) {
   #home.hero { background-position: center 75%; }
   #sail-hero.hero, #about-hero.hero { background-position: 62% 68%; }
-  #donate-hero.hero { background-position: center 30%; }
+  #donate-hero.hero { background-position: center 42%; }
   #contact-hero.hero, #sponsor-hero.hero { background-position: 62% 72%; }
 }
 /* Page hero variant used on Sail/About/Donate/Sponsor/Contact - a shorter
