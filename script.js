@@ -2,10 +2,8 @@
 // through the CMS without ever touching this file.
 //
 // Every page-specific section below is guarded by checking that section's
-// root element exists first. This site has separate pages now (Home, Sail,
-// FAQ, About, Support, Donate, Contact) that all share this one script, so
-// without these guards, code meant for one page would crash on every other
-// page and silently stop everything after it from running.
+// root element exists first, since this site has separate pages that all
+// share this one script.
 
 function setText(id, value) {
   const el = document.getElementById(id);
@@ -28,6 +26,13 @@ function setLink(id, cta, fallbackHref) {
   el.href = cta.href || fallbackHref || '#';
 }
 
+function setHeroBackground(elId, imagePath) {
+  const el = document.getElementById(elId);
+  if (el && imagePath) {
+    el.style.backgroundImage = `linear-gradient(180deg, rgba(8,37,63,0.78) 0%, rgba(5,22,34,0.88) 100%), url('${imagePath}')`;
+  }
+}
+
 function flagSVG(color) {
   return `<svg viewBox="0 0 28 20" class="flag" aria-hidden="true"><rect width="28" height="20" fill="${color}"/><path d="M0,0 L28,10 L0,20 Z" fill="rgba(255,255,255,0.15)"/></svg>`;
 }
@@ -43,6 +48,30 @@ function renderTiers(containerId, tiers, flagColor) {
       <p>${t.body}</p>
     </div>
   `).join('');
+}
+
+function renderVideoGrid(gridId, headlineId, introId, videosData) {
+  const grid = document.getElementById(gridId);
+  if (!grid || !videosData) return;
+  setText(headlineId, videosData.headline);
+  setText(introId, videosData.intro);
+  grid.innerHTML = videosData.list.map(v => `
+    <button class="video-card" type="button" data-drive-id="${v.drive_id}" aria-label="Play: ${v.title}">
+      <span class="video-card-poster">
+        <span class="video-play-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="#051622"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        <span class="video-card-title">${v.title}</span>
+      </span>
+    </button>
+  `).join('');
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('.video-card');
+    if (!card) return;
+    const id = card.getAttribute('data-drive-id');
+    if (!id) return;
+    card.outerHTML = `<div class="video-card"><iframe src="https://drive.google.com/file/d/${id}/preview" allow="autoplay" allowfullscreen></iframe></div>`;
+  });
 }
 
 async function init() {
@@ -72,16 +101,14 @@ async function init() {
       if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
     }));
 
-    // Highlight the nav link matching the current page
     const currentPage = location.pathname.split('/').pop() || 'index.html';
     navLinks.querySelectorAll('a').forEach(a => {
       if (a.getAttribute('href') === currentPage) a.classList.add('active');
     });
   }
 
-  // Single source of truth for every "Donate"/"Make a Gift" button sitewide.
-  // Any CTA in content.json with a blank href automatically uses this link.
-  const donateUrl = content.donate.donate_url;
+  // Single source of truth for every "Donate" button sitewide.
+  const donateUrl = content.site.donate_url;
 
   // Hero (Home page only)
   if (document.getElementById('home')) {
@@ -111,14 +138,26 @@ async function init() {
           </div>`;
       }).join('');
     }
+
+    // Home closing section (moved here from the old Donate page's top intro, per Sheila's request)
+    if (content.home_closing) {
+      setText('home-closing-headline', content.home_closing.headline);
+      setText('home-closing-body', content.home_closing.body);
+      setLink('home-closing-cta-primary', content.home_closing.cta_primary, donateUrl);
+      setLink('home-closing-cta-secondary', content.home_closing.cta_secondary);
+    }
   }
 
   // Sail (Sail page only)
-  if (document.getElementById('sail')) {
+  if (document.getElementById('sail-hero')) {
     const sail = content.sail;
+    setHeroBackground('sail-hero', sail.hero_image);
     setText('sail-headline', sail.headline);
     setText('sail-subhead', sail.subhead);
     setText('sail-intro', sail.intro);
+
+    const featuredPhoto = document.getElementById('sail-featured-photo');
+    if (featuredPhoto && sail.featured_photo) featuredPhoto.src = sail.featured_photo;
 
     setText('sail-adaptive-headline', sail.adaptive.headline);
     setText('sail-adaptive-body', sail.adaptive.body);
@@ -129,40 +168,27 @@ async function init() {
     setText('sail-adaptive-closing', sail.adaptive.closing);
     setLink('sail-adaptive-cta', sail.adaptive.cta);
 
+    // Optional video next to Adaptive Sailing / Getting Started
+    const adaptiveVideoWrap = document.getElementById('sail-adaptive-video');
+    if (adaptiveVideoWrap) {
+      if (sail.adaptive.video_drive_id) {
+        adaptiveVideoWrap.innerHTML = `<div class="video-card" style="max-width:400px;"><iframe src="https://drive.google.com/file/d/${sail.adaptive.video_drive_id}/preview" allow="autoplay" allowfullscreen></iframe></div>`;
+      } else {
+        adaptiveVideoWrap.style.display = 'none';
+      }
+    }
+
     setText('sail-access-headline', sail.access.headline);
     setHTML('sail-access-body', sail.access.body);
     setLink('sail-access-cta', sail.access.cta);
 
     setText('sail-membership-headline', sail.membership.headline);
-    setText('sail-membership-body', sail.membership.body);
-    setText('sail-membership-adaptive-note', sail.membership.adaptive_note);
-    setText('sail-membership-access-note', sail.membership.access_note);
+    setHTML('sail-membership-body', sail.membership.body);
 
     setText('sail-closing-headline', sail.closing.headline);
     setHTML('sail-closing-body', sail.closing.body);
 
-    // Videos (click-to-play, so nothing loads until a visitor actually clicks)
-    const videoGrid = document.getElementById('video-grid');
-    if (content.videos && videoGrid) {
-      setText('videos-headline', content.videos.headline);
-      setText('videos-intro', content.videos.intro);
-      videoGrid.innerHTML = content.videos.list.map(v => `
-        <button class="video-card" type="button" data-drive-id="${v.drive_id}" aria-label="Play: ${v.title}">
-          <span class="video-card-poster">
-            <span class="video-play-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="#051622"><path d="M8 5v14l11-7z"/></svg>
-            </span>
-            <span class="video-card-title">${v.title}</span>
-          </span>
-        </button>
-      `).join('');
-      videoGrid.addEventListener('click', (e) => {
-        const card = e.target.closest('.video-card');
-        if (!card) return;
-        const id = card.getAttribute('data-drive-id');
-        card.outerHTML = `<div class="video-card"><iframe src="https://drive.google.com/file/d/${id}/preview" allow="autoplay" allowfullscreen></iframe></div>`;
-      });
-    }
+    renderVideoGrid('video-grid', 'videos-headline', 'videos-intro', content.videos);
   }
 
   // FAQ (FAQ page only)
@@ -180,8 +206,9 @@ async function init() {
   }
 
   // About (About page only)
-  if (document.getElementById('about')) {
+  if (document.getElementById('about-hero')) {
     const about = content.about;
+    setHeroBackground('about-hero', about.hero_image);
     setText('about-headline', about.headline);
     setHTML('about-intro', about.intro);
     setText('about-mission-headline', about.mission.headline);
@@ -202,38 +229,51 @@ async function init() {
 
     setText('about-story-headline', about.jims_story.headline);
     setHTML('about-story-body', about.jims_story.body);
+    const jimsPhoto = document.getElementById('about-story-photo');
+    if (jimsPhoto) {
+      if (about.jims_story.photo) {
+        jimsPhoto.src = about.jims_story.photo;
+        jimsPhoto.style.display = '';
+      } else {
+        jimsPhoto.style.display = 'none';
+      }
+    }
   }
 
-  // Support (Support page only)
-  if (document.getElementById('support')) {
-    const support = content.support;
-    setText('support-headline', support.headline);
-    setHTML('support-intro', support.intro);
-    setLink('support-intro-cta', support.intro_cta, donateUrl);
+  // Donate (Donate page only - formerly "Support")
+  if (document.getElementById('donate-hero')) {
+    const donate = content.donate;
+    setHeroBackground('donate-hero', donate.hero_image);
+    setText('donate-headline', donate.headline);
+    setHTML('donate-intro', donate.intro);
+    setLink('donate-intro-cta', donate.intro_cta, donateUrl);
 
-    setText('support-gift-headline', support.gift_impact.headline);
-    setText('support-gift-intro', support.gift_impact.intro);
-    const giftItems = document.getElementById('support-gift-items');
-    if (giftItems) giftItems.innerHTML = support.gift_impact.items.map(i => `<li>${i}</li>`).join('');
-    setText('support-gift-closing', support.gift_impact.closing);
-    setLink('support-gift-cta', support.gift_impact.cta, donateUrl);
+    setText('donate-closing-headline', donate.closing.headline);
+    const closingLines = document.getElementById('donate-closing-lines');
+    if (closingLines) closingLines.innerHTML = donate.closing.lines.map(l => `<div>${l}</div>`).join('');
+    setText('donate-closing-body', donate.closing.body);
+    setLink('donate-closing-cta-primary', donate.closing.cta_primary, donateUrl);
+    setLink('donate-closing-cta-secondary', donate.closing.cta_secondary);
+  }
 
-    setText('support-partner-headline', support.partner.headline);
-    setHTML('support-partner-body', support.partner.body);
-    setLink('support-partner-cta', support.partner.cta);
+  // Sponsor (Sponsor page only - formerly "Donate")
+  if (document.getElementById('sponsor-hero')) {
+    const sponsor = content.sponsor;
+    setHeroBackground('sponsor-hero', sponsor.hero_image);
 
-    setText('support-closing-headline', support.closing.headline);
-    const closingLines = document.getElementById('support-closing-lines');
-    if (closingLines) closingLines.innerHTML = support.closing.lines.map(l => `<div>${l}</div>`).join('');
-    setText('support-closing-body', support.closing.body);
-    setLink('support-closing-cta-primary', support.closing.cta_primary, donateUrl);
-    setLink('support-closing-cta-secondary', support.closing.cta_secondary);
+    setText('sponsor-corporate-headline', sponsor.corporate.headline);
+    setText('sponsor-corporate-intro', sponsor.corporate.intro);
+    renderTiers('sponsor-corporate-tiers', sponsor.corporate.tiers, '#F4A32E');
+    setLink('sponsor-corporate-cta', sponsor.corporate.cta);
+    setText('sponsor-custom-note', sponsor.corporate.custom_note);
+    setLink('sponsor-custom-cta', sponsor.corporate.custom_cta);
+    setText('sponsor-custom-note-after', sponsor.corporate.custom_note_after);
 
-    if (support.sponsors) {
-      setText('support-sponsors-headline', support.sponsors.headline);
-      const sponsorsGrid = document.getElementById('support-sponsors-grid');
+    if (sponsor.sponsors) {
+      setText('sponsor-sponsors-headline', sponsor.sponsors.headline);
+      const sponsorsGrid = document.getElementById('sponsor-sponsors-grid');
       if (sponsorsGrid) {
-        sponsorsGrid.innerHTML = support.sponsors.list.map(s => s.logo
+        sponsorsGrid.innerHTML = sponsor.sponsors.list.map(s => s.logo
           ? `<img src="${s.logo}" alt="${s.name}" class="sponsor-logo">`
           : `<div class="sponsor-wordmark">${s.name}</div>`
         ).join('');
@@ -241,37 +281,10 @@ async function init() {
     }
   }
 
-  // Donate (Donate page only)
-  if (document.getElementById('donate')) {
-    const donate = content.donate;
-    setText('donate-headline', donate.headline);
-    setText('donate-subhead', donate.subhead);
-    setHTML('donate-intro', donate.intro);
-
-    setText('donate-individual-headline', donate.individual.headline);
-    setText('donate-individual-intro', donate.individual.intro);
-    renderTiers('donate-individual-tiers', donate.individual.tiers, '#078D87');
-    setLink('donate-individual-cta', donate.individual.cta, donateUrl);
-
-    setText('donate-corporate-headline', donate.corporate.headline);
-    setText('donate-corporate-intro', donate.corporate.intro);
-    renderTiers('donate-corporate-tiers', donate.corporate.tiers, '#F4A32E');
-    setLink('donate-corporate-cta', donate.corporate.cta);
-
-    setText('donate-major-headline', donate.major_gift.headline);
-    setHTML('donate-major-body', donate.major_gift.body);
-    setLink('donate-major-cta', donate.major_gift.cta);
-
-    setText('donate-confidence-headline', donate.confidence.headline);
-    setText('donate-confidence-body', donate.confidence.body);
-    setText('donate-confidence-ein', 'EIN: ' + donate.confidence.ein);
-    setText('donate-confidence-tagline', donate.confidence.tagline);
-    setLink('donate-confidence-cta', donate.confidence.cta, donateUrl);
-  }
-
   // Contact (Contact page only)
-  if (document.getElementById('contact')) {
+  if (document.getElementById('contact-hero')) {
     const contact = content.contact;
+    setHeroBackground('contact-hero', contact.hero_image);
     setText('contact-headline', contact.headline);
     setHTML('contact-body', contact.body);
     setText('contact-form-headline', contact.form_headline);
@@ -279,13 +292,14 @@ async function init() {
     if (interestEl) interestEl.innerHTML = contact.interest_options.map(o => `<option>${o}</option>`).join('');
     setText('contact-submit', contact.submit_label);
 
-    setText('contact-sail-headline', contact.ready_to_sail.headline);
-    setText('contact-sail-body', contact.ready_to_sail.body);
-    setLink('contact-sail-cta', contact.ready_to_sail.cta);
-
-    setText('contact-support-headline', contact.ready_to_support.headline);
-    setText('contact-support-body', contact.ready_to_support.body);
-    setLink('contact-support-cta', contact.ready_to_support.cta);
+    const contactVideoWrap = document.getElementById('contact-video');
+    if (contactVideoWrap) {
+      if (contact.video_drive_id) {
+        contactVideoWrap.innerHTML = `<div class="video-card"><iframe src="https://drive.google.com/file/d/${contact.video_drive_id}/preview" allow="autoplay" allowfullscreen></iframe></div>`;
+      } else {
+        contactVideoWrap.innerHTML = '';
+      }
+    }
   }
 
   // Footer (present on every primary page)
@@ -305,19 +319,12 @@ async function init() {
     if (footerNav) footerNav.innerHTML = footer.nav.map(n => `<li><a href="${n.href}">${n.label}</a></li>`).join('');
 
     setText('footer-legal-statement', footer.legal_statement);
-    setText('footer-ein', 'EIN: ' + content.donate.confidence.ein);
+    setText('footer-ein', 'EIN: ' + footer.ein);
     setText('footer-copyright', footer.copyright);
 
     const instaEl = document.getElementById('footer-instagram');
     if (instaEl && footer.instagram_handle) {
-      instaEl.innerHTML = `Instagram: <a href="${footer.instagram_url}" target="_blank" rel="noopener">${footer.instagram_handle}</a>`;
-    }
-
-    const legalLinks = document.getElementById('footer-legal-links');
-    if (legalLinks) {
-      legalLinks.innerHTML = footer.legal_links.map(l =>
-        l.action ? `<a href="#" data-action="${l.action}">${l.label}</a>` : `<a href="${l.href}">${l.label}</a>`
-      ).join('');
+      instaEl.innerHTML = `<a href="${footer.instagram_url}" target="_blank" rel="noopener" aria-label="Instagram: ${footer.instagram_handle}"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M12 2.2c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41-.56-.22-.96-.48-1.38-.9-.42-.42-.68-.82-.9-1.38-.16-.42-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41 1.27-.06 1.65-.07 4.85-.07M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.31-1.46.72-2.13 1.38C1.35 2.68.94 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.31.79.72 1.46 1.38 2.13.67.66 1.34 1.07 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.31 1.46-.72 2.13-1.38.66-.67 1.07-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91-.31-.79-.72-1.46-1.38-2.13C21.32 1.35 20.65.94 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0z"/><path d="M12 5.84A6.16 6.16 0 1 0 18.16 12 6.16 6.16 0 0 0 12 5.84zm0 10.16A4 4 0 1 1 16 12a4 4 0 0 1-4 4z"/><circle cx="18.41" cy="5.59" r="1.44"/></svg></a>`;
     }
   }
 }

@@ -53,6 +53,8 @@
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+body.bg-white { background: var(--white); }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -255,12 +257,28 @@ p:last-child { margin-bottom: 0; }
 .hero {
   background:
     linear-gradient(180deg, rgba(8,37,63,0.78) 0%, rgba(5,22,34,0.88) 100%),
-    url('assets/hero-sail.jpg') center 35% / cover no-repeat;
+    center 35% / cover no-repeat;
   color: var(--canvas);
   padding: clamp(72px, 12vw, 140px) 0 clamp(90px, 10vw, 130px);
   position: relative;
   clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%);
 }
+#home.hero {
+  background-image:
+    linear-gradient(180deg, rgba(8,37,63,0.78) 0%, rgba(5,22,34,0.88) 100%),
+    url('assets/hero-sail-v2.jpg');
+}
+/* Page hero variant used on Sail/About/Donate/Sponsor/Contact - a shorter
+   banner version of the same treatment, background set per-page via JS */
+.hero-page {
+  padding: clamp(56px, 8vw, 90px) 0 clamp(64px, 7vw, 90px);
+}
+.hero-page .section-head { margin-bottom: 0; }
+.hero-page .eyebrow { color: var(--brass); }
+.hero-page h2 { color: var(--white); }
+.hero-page .section-head p,
+.hero-page p { color: rgba(237,239,230,0.9); }
+.hero-page .subhead { color: var(--brass) !important; }
 .hero .container { max-width: 900px; }
 .hero h1 {
   font-size: clamp(2.8rem, 7vw, 5.2rem);
@@ -282,11 +300,13 @@ section { padding: var(--section-pad) 0; position: relative; }
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
-  align-items: start;
+  align-items: stretch;
   padding: 56px 0;
   border-top: 1px solid rgba(22,35,43,0.1);
 }
 .block:first-of-type { border-top: none; }
+.block.block-full { grid-template-columns: 1fr; }
+.block.block-full .main { max-width: none; }
 .block .side {
   font-family: var(--font-mono);
   font-size: 0.85rem;
@@ -298,7 +318,8 @@ section { padding: var(--section-pad) 0; position: relative; }
 .block .side .telltale { margin-bottom: 12px; }
 .block-side-image {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
+  min-height: 220px;
   object-fit: cover;
   display: block;
   border-radius: var(--radius-md);
@@ -371,14 +392,6 @@ section { padding: var(--section-pad) 0; position: relative; }
   max-width: 720px;
   margin: 40px auto 0;
   font-size: 1.08rem;
-}
-.story p:first-of-type::first-letter {
-  font-family: var(--font-display);
-  font-size: 3.4rem;
-  float: left;
-  line-height: 0.8;
-  padding-right: 10px;
-  color: var(--brass);
 }
 
 /* ---------- Support gift list section ---------- */
@@ -610,8 +623,8 @@ section { padding: var(--section-pad) 0; position: relative; }
   margin-top: 32px;
 }
 .sponsor-logo {
-  max-height: 56px;
-  max-width: 180px;
+  max-height: 96px;
+  max-width: 280px;
   width: auto;
   object-fit: contain;
 }
@@ -782,7 +795,7 @@ footer {
 .footer-grid {
   display: grid;
   grid-template-columns: 1.3fr 1fr;
-  gap: 40px;
+  gap: 56px;
   padding-bottom: 36px;
   border-bottom: 1px solid rgba(237,239,230,0.14);
 }
@@ -813,11 +826,16 @@ footer .tagline {
 .footer-line a:hover { text-decoration-color: var(--brass); }
 
 .footer-social {
-  font-size: 0.85rem;
-  margin-top: 4px;
+  margin-top: 12px;
 }
-.footer-social a { color: var(--brass); text-decoration: none; }
-.footer-social a:hover { text-decoration: underline; }
+.footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--brass);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+.footer-social a:hover { color: var(--white); transform: translateY(-1px); }
 
 .footer-nav ul {
   list-style: none;
@@ -825,7 +843,7 @@ footer .tagline {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 14px;
 }
 .footer-nav a {
   text-decoration: none;

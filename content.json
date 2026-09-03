@@ -2,13 +2,14 @@
   "site": {
     "org_name": "West Sacramento Inclusive Sailing Foundation",
     "email": "sheila@westsacinclusivesailing.org",
+    "donate_url": "https://buy.stripe.com/3cI9AU0fd4Il16la7b4gg01",
     "nav": [
       { "label": "Home", "href": "index.html" },
       { "label": "Sail", "href": "sail.html" },
-      { "label": "FAQ", "href": "faq.html" },
       { "label": "About", "href": "about.html" },
-      { "label": "Support", "href": "support.html" },
       { "label": "Donate", "href": "donate.html" },
+      { "label": "Sponsor", "href": "sponsor.html" },
+      { "label": "FAQ", "href": "faq.html" },
       { "label": "Contact", "href": "contact.html" }
     ]
   },
@@ -18,7 +19,8 @@
     "subhead": "Feel the wind. Take the helm. Discover what you can do.",
     "body": "Based in West Sacramento, West Sacramento Inclusive Sailing Foundation opens the world of sailing to people who have historically faced barriers to the sport.\n\nWith adaptive sailboats, experienced support, and safety at the center of everything we do, we make it possible to get on the water, learn to sail, and go as far as your ambition takes you.",
     "cta_primary": { "text": "Sail With Us", "href": "sail.html" },
-    "cta_secondary": { "text": "Donate", "href": "" }
+    "cta_secondary": { "text": "Donate", "href": "" },
+    "video_drive_id": ""
   },
 
   "home_blocks": [
@@ -35,18 +37,28 @@
       "cta": { "text": "Sail With Us", "href": "sail.html" }
     },
     {
-      "headline": "Help Put More People at the Helm.",
+      "headline": "Everyone can Sail.",
       "body": "Access to sailing takes the right boats, adaptive equipment, skilled instruction, trained support, and a commitment to safety.\n\nDonors and corporate partners make that possible.\n\nYour support gives more people the opportunity to experience the wind, take control of a sailboat, and discover a sport they may never have imagined was open to them.",
       "image": "assets/dock-prep.jpg",
       "cta_primary": { "text": "Donate", "href": "" },
-      "cta_secondary": { "text": "Become a Corporate Partner", "href": "support.html" }
+      "cta_secondary": { "text": "Become a Corporate Sponsor", "href": "sponsor.html" }
     }
   ],
 
+  "home_closing": {
+    "headline": "Everyone Can Sail",
+    "body": "For the freedom, for the challenge, for the love of sailing.",
+    "cta_primary": { "text": "Donate", "href": "" },
+    "cta_secondary": { "text": "Become a Sponsor", "href": "sponsor.html" }
+  },
+
   "sail": {
+    "hero_image": "assets/about-hero.jpg",
     "headline": "Come Sail With Us.",
     "subhead": "Feel the wind. Take the helm. Discover what you can do.",
     "intro": "Whether you have a disability, have never had access to sailing, or simply never imagined sailing could be for you, there's a way to get on the water.",
+
+    "featured_photo": "assets/sail-featured-photo.jpg",
 
     "adaptive": {
       "headline": "Adaptive Sailing",
@@ -58,20 +70,19 @@
         "Bring a support person who is willing to learn how to rig and de-rig the sailboat and provide an extra set of hands when needed."
       ],
       "closing": "Once you're a member, you'll have access to Adaptive Sailing Clinics held throughout the year on Mondays and Wednesdays, as well as access to Lake Washington Sailing Club.",
-      "cta": { "text": "Apply Through CAF", "href": "contact.html" }
+      "cta": { "text": "Apply Through CAF", "href": "https://www.challengedathletes.org" },
+      "video_drive_id": "1CSgwCvKzg3g_c9xkEp8ZfWkimyUsF7et"
     },
 
     "access": {
-      "headline": "Looking for Access to Sailing?",
+      "headline": "Want to Learn How to Sail?",
       "body": "You don't need to have a disability to have faced barriers to sailing.\n\nMaybe you never grew up around boats. Maybe sailing has always seemed financially or socially out of reach. Maybe you've simply never had the opportunity.\n\nWe want to change that.\n\nSailors seeking greater access to the sport can join through Lake Washington Sailing Club and pay the Club's annual membership fee.\n\nMembership gives you access to Lake Washington Sailing Club and opportunities to get involved, learn, and become part of the sailing community.",
-      "cta": { "text": "Join Lake Washington Sailing Club", "href": "contact.html" }
+      "cta": { "text": "Join Lake Washington Sailing Club", "href": "https://lwsailing.org" }
     },
 
     "membership": {
       "headline": "Your Membership",
-      "body": "Memberships run July 1 through June 30 each year.",
-      "adaptive_note": "Adaptive sailors: Apply through Challenged Athletes Foundation. Once approved, CAF covers your Lake Washington Sailing Club membership.",
-      "access_note": "Access sailors: Join directly through Lake Washington Sailing Club and pay the annual membership fee."
+      "body": "Membership runs July 1 - June 30, annually. Adaptive Sailors must seek membership for Lake Washington Sailing Club through the <a href=\"https://www.challengedathletes.org/\" target=\"_blank\" rel=\"noopener\">Challenged Athlete Foundation</a>. Access sailors are required to join as a member of the <a href=\"https://lwsailing.org/\" target=\"_blank\" rel=\"noopener\">Lake Washington Sailing Club</a> and pay the annual fee."
     },
 
     "closing": {
@@ -100,7 +111,7 @@
     "items": [
       {
         "question": "Do I need sailing experience?",
-        "answer": "Not at all. You can come to us having never set foot on a sailboat. We'll help you get started, learn at your own pace, and decide how far you want to go."
+        "answer": "Not at all. You can come to us having never set sail on a sailboat before. We will help you get started, learn at your own pace, and support you in your sailing journey, no matter how far you want to go."
       },
       {
         "question": "Can I sail if I have a disability?",
@@ -112,11 +123,11 @@
       },
       {
         "question": "Do I need to bring someone with me?",
-        "answer": "Adaptive sailors need to bring a support person who is willing to learn how to rig and de-rig the sailboat and provide an extra set of hands when needed.\n\nNo sailing experience is required for your support person; we can teach them what they need to know."
+        "answer": "Adaptive sailors must bring a support person who is willing to learn how to rig and de-rig a sailboat and provide an extra set of hands whenever needed. No sailing experience is required for your support person; we will teach them what they need to know."
       },
       {
         "question": "How much does it cost to participate?",
-        "answer": "For sailors with disabilities, membership is covered by the Challenged Athletes Foundation (CAF) once your application is approved.\n\nThose seeking access to sailing who do not qualify through CAF join directly through Lake Washington Sailing Club and pay the Club's annual membership fee.\n\nMembership runs from July 1 through June 30."
+        "answer": "For sailors with disabilities, membership is covered by the <a href=\"https://www.challengedathletes.org\" target=\"_blank\" rel=\"noopener\">Challenged Athletes Foundation</a> (CAF) once your application is approved.\n\nThose seeking access to sailing who do not qualify through CAF join directly through <a href=\"https://lwsailing.org\" target=\"_blank\" rel=\"noopener\">Lake Washington Sailing Club</a> and pay the Club's annual membership fee.\n\nMembership runs from July 1 through June 30."
       },
       {
         "question": "Where and when do you sail?",
@@ -130,6 +141,7 @@
   },
 
   "about": {
+    "hero_image": "assets/about-hero.jpg",
     "headline": "We Believe Everyone Deserves the Chance to Sail.",
     "intro": "West Sacramento Inclusive Sailing Foundation opens the sport of sailing to people who have historically faced barriers to getting on the water.\n\nThrough adaptive sailboats, education, support, and a commitment to safety, we give people the opportunity to feel the wind, take the helm, and discover what they can do.\n\nFrom a first sail to international competition, every sailor should have the opportunity to decide how far they want to go.",
 
@@ -140,7 +152,7 @@
 
     "founders": {
       "headline": "Founded by Sailors. Built for More Sailors.",
-      "body": "Jim and Kathi Thweatt founded West Sacramento Inclusive Sailing Foundation to open the sport they love to more people.\n\nBased in West Sacramento and serving sailors throughout Northern California and beyond, the Foundation is building opportunities for people to discover sailing, develop their skills, and become part of a larger sailing community.\n\nOpen the water. Create sailors. Let them decide how far they want to go."
+      "body": "Jim and Kathi Thweatt founded West Sacramento Inclusive Sailing Foundation to open the sport they love to more people.\n\nBased in West Sacramento and serving sailors throughout Northern California and beyond, the Foundation is building opportunities for people to discover sailing, develop their skills, and become part of a larger sailing community."
     },
 
     "board": {
@@ -149,42 +161,24 @@
       "members": [
         { "name": "Jim Thweatt", "title": "President and Founder" },
         { "name": "Kathi Thweatt", "title": "Vice President and Founder" },
-        { "name": "[Name TBD]", "title": "Secretary and Treasurer" },
+        { "name": "Sam Niedzielski", "title": "Secretary and Treasurer" },
+        { "name": "Jonathan Tweet", "title": "At-Large Director" },
         { "name": "Sheila Johnston", "title": "Executive Director" }
       ]
     },
 
     "jims_story": {
       "headline": "Jim's Story",
-      "body": "For Jim Thweatt, the belief that sport can change what's possible is personal.\n\nJim lost his lower leg at age 17. Rather than stepping away from athletics, he went on to become an elite adaptive skier and built a career helping others discover their own abilities through sport.\n\nEventually, Jim found sailing.\n\nWhat began as another way to compete became much more. Sailing offered independence, challenge, strategy, and the unmistakable feeling of being powered by the wind.\n\nJim went on to compete internationally and became a member of the U.S. Para Sailing Team, representing the United States on the world stage.\n\nBut his experience also showed him something else: too many people never get the opportunity to discover sailing in the first place.\n\nThe right adaptive sailboat can make a difference. So can knowledgeable instruction, hands-on assistance, a commitment to safety, and simply having someone say, \"Yes. You can sail.\"\n\nThat belief is at the heart of the West Sacramento Inclusive Sailing Foundation.\n\nJim and Kathi want more people to experience what happens when the barriers come down, the sails go up, and you feel the wind in an entirely new way.\n\nYour first sail can change what you believe is possible."
+      "body": "For Jim Thweatt, the belief that sport can change what's possible is personal.\n\nJim lost his lower leg at age 17. Rather than stepping away from athletics, he went on to become an elite adaptive skier and built a career helping others discover their own abilities through sport.\n\nEventually, Jim found sailing.\n\nWhat began as another way to compete became much more. Sailing offered independence, challenge, strategy, and the unmistakable feeling of being powered by the wind.\n\nJim went on to compete internationally and became a member of the U.S. Para Sailing Team, representing the United States on the world stage.\n\nBut his experience also showed him something else: too many people never get the opportunity to discover sailing in the first place.\n\nThe right adaptive sailboat can make a difference. So can knowledgeable instruction, hands-on assistance, a commitment to safety, and simply having someone say, \"Yes. You can sail.\"\n\nThat belief is at the heart of the West Sacramento Inclusive Sailing Foundation.\n\nJim and Kathi want more people to experience what happens when the barriers come down, the sails go up, and you feel the wind in an entirely new way.\n\nYour first sail can change what you believe is possible.",
+      "photo": "assets/jims-story-photo.jpg"
     }
   },
 
-  "support": {
+  "donate": {
+    "hero_image": "assets/jims-story-photo.jpg",
     "headline": "Put More People at the Helm.",
     "intro": "Your support opens the water to people who may never have imagined sailing was possible.\n\nEvery sailor needs the right opportunity to begin. For some, that also means an adaptive sailboat, specialized equipment, experienced instruction, hands-on assistance, and a safe environment to learn.\n\nYour support makes all of it possible.",
     "intro_cta": { "text": "Donate", "href": "" },
-
-    "gift_impact": {
-      "headline": "Your Gift Gets Sailors on the Water.",
-      "intro": "Donations help fund:",
-      "items": [
-        "Adaptive sailboats and equipment",
-        "Sailing instruction and training",
-        "Safety equipment",
-        "Boat maintenance and transportation",
-        "Scholarships and participant assistance",
-        "Regattas and competitive opportunities"
-      ],
-      "closing": "Whether someone wants to experience sailing for the first time or develop the skills to race internationally, your gift helps give them that opportunity.",
-      "cta": { "text": "Make a Gift", "href": "" }
-    },
-
-    "partner": {
-      "headline": "Partner With Us.",
-      "body": "Companies, foundations, and major donors can help change who gets to participate in sailing.\n\nCorporate sponsorships and philanthropic partnerships help us expand programs, acquire adaptive sailboats and equipment, support sailors, and bring inclusive sailing to more people throughout Northern California and beyond.\n\nTogether, we can build something lasting\u2014and give more people the chance to feel the wind, take the helm, and discover what they can do.",
-      "cta": { "text": "Become a Partner", "href": "mailto:sheila@westsacinclusivesailing.org" }
-    },
 
     "closing": {
       "headline": "Open the Water.",
@@ -195,80 +189,48 @@
       ],
       "body": "Help make the next first sail possible.",
       "cta_primary": { "text": "Donate", "href": "" },
-      "cta_secondary": { "text": "Become a Sponsor", "href": "mailto:sheila@westsacinclusivesailing.org" }
+      "cta_secondary": { "text": "Become a Sponsor", "href": "sponsor.html" }
+    }
+  },
+
+  "sponsor": {
+    "hero_image": "assets/sunset-sail.jpg",
+    "corporate": {
+      "headline": "Become a Corporate Sponsor",
+      "intro": "Corporate partners help provide the adaptive sailboats, equipment, instruction, safety, and opportunities that put more sailors on the water. Corporate partners receive year-round brand visibility through our website, events, and communications, with opportunities for recognition on adaptive sailboats, sailing equipment and clinics, connecting your company directly to inclusive sailing in action.",
+      "tiers": [
+        { "amount": "$2,500", "name": "BREEZE", "body": "Help provide the equipment, instruction, and support that introduce more people to sailing." },
+        { "amount": "$5,000", "name": "FAIR WINDS", "body": "Expand adaptive sailing opportunities and help sailors build their skills, confidence, and independence on the water." },
+        { "amount": "$7,500", "name": "FULL SAIL", "body": "Make a leadership investment in adaptive sailboats, expanded programming, and opportunities for sailors to train and compete throughout Northern California and beyond." }
+      ],
+      "cta": { "text": "Become a Corporate Partner", "href": "contact.html" },
+      "custom_note": "Custom sponsorships are always available.",
+      "custom_cta": { "text": "Contact Us", "href": "contact.html" },
+      "custom_note_after": "for more information."
     },
 
     "sponsors": {
-      "headline": "Thank You, Sponsors",
+      "headline": "Our Sponsors",
       "list": [
         { "name": "DV Creative", "logo": "/uploads/sponsor-dv-creative-lab.png" },
         { "name": "Luminari Partners", "logo": "/uploads/sponsor-luminari-partners.png" },
         { "name": "Digital Contrast Media", "logo": "/uploads/sponsor-digital-contrast-media.png" }
       ]
-    }
-  },
-
-  "donate": {
-    "headline": "Open the Water.",
-    "subhead": "Your gift puts more people at the helm.",
-    "intro": "West Sacramento Inclusive Sailing Foundation is a 501(c)(3) nonprofit organization bringing inclusive sailing to Northern California and opening opportunities for sailors to go as far as their ambitions take them.\n\nYour support provides adaptive sailboats, specialized equipment, safety gear, instruction, training, and the hands-on support that gets sailors on the water.",
-
-    "donate_url": "https://buy.stripe.com/3cI9AU0fd4Il16la7b4gg01",
-
-    "individual": {
-      "headline": "Individual Giving",
-      "intro": "Every gift opens the water a little wider.",
-      "tiers": [
-        { "amount": "$250", "name": "Get on the Water", "body": "Help provide the safety gear, sailing equipment, and supplies that make a day on the water possible." },
-        { "amount": "$1,000", "name": "Learn to Sail", "body": "Help provide instruction, adaptive sailing clinics, equipment, and support that allow sailors to build confidence and skills." },
-        { "amount": "$5,000+", "name": "Go Further", "body": "Make a significant investment in adaptive equipment, sailor development, training, and opportunities to race and compete." }
-      ],
-      "cta": { "text": "Make a Gift", "href": "" }
-    },
-
-    "corporate": {
-      "headline": "Put Your Company Behind Inclusive Sailing.",
-      "intro": "Corporate partners help provide the adaptive sailboats, equipment, instruction, safety, and opportunities that put more sailors on the water.",
-      "tiers": [
-        { "amount": "$5,000", "name": "BREEZE", "body": "Help provide the equipment, instruction, and support that introduce more people to sailing." },
-        { "amount": "$10,000", "name": "FAIR WINDS", "body": "Expand adaptive sailing opportunities and help sailors build their skills, confidence, and independence on the water." },
-        { "amount": "$25,000+", "name": "FULL SAIL", "body": "Make a leadership investment in adaptive sailboats, expanded programming, and opportunities for sailors to train and compete throughout Northern California and beyond." }
-      ],
-      "cta": { "text": "Become a Corporate Partner", "href": "contact.html" }
-    },
-
-    "major_gift": {
-      "headline": "Want to Make an Even Bigger Impact?",
-      "body": "A major gift can fund a specific need\u2014from adaptive sailing equipment to a new sailboat, expanded programming, or competitive opportunities for our sailors.\n\nLet's talk about what your support can make possible.",
-      "cta": { "text": "Contact Us About a Major Gift", "href": "contact.html" }
     },
 
     "confidence": {
-      "headline": "Give With Confidence.",
-      "body": "West Sacramento Inclusive Sailing Foundation is recognized as a 501(c)(3) tax-exempt charitable organization. Contributions are tax-deductible to the extent permitted by law.",
-      "ein": "93-1949129",
-      "tagline": "Feel the wind. Take the helm. See how far you can go.",
-      "cta": { "text": "Donate", "href": "" }
+      "ein": "93-1949129"
     }
   },
 
   "contact": {
+    "hero_image": "assets/sunset-sail.jpg",
     "headline": "Let's Get You Connected.",
     "body": "Want to sail? Volunteer? Support our work? Have a question?\n\nWe'd love to hear from you.\n\nWest Sacramento Inclusive Sailing Foundation is based in West Sacramento and serves sailors throughout Northern California and beyond.",
     "form_headline": "Get in Touch",
     "interest_options": ["Sailing", "Volunteering", "Donating", "Corporate partnership", "Something else"],
     "submit_label": "Send Message",
-
-    "ready_to_sail": {
-      "headline": "Ready to Sail?",
-      "body": "If you're looking for information about adaptive sailing or getting access to sailing, start here.",
-      "cta": { "text": "Sail With Us", "href": "sail.html" }
-    },
-    "ready_to_support": {
-      "headline": "Ready to Support the Mission?",
-      "body": "Help put more people at the helm.",
-      "cta": { "text": "Donate", "href": "donate.html" }
-    }
+    "video_drive_id": "16N2Pm41pfk9E6_iMCRaxSgvZfDY9MJbG"
   },
 
   "legal": {
@@ -330,11 +292,13 @@
     "address": "West Sacramento, California",
     "phone": "(916) 720-3883",
     "email": "sheila@westsacinclusivesailing.org",
+    "ein": "93-1949129",
     "nav": [
       { "label": "Sail With Us", "href": "sail.html" },
       { "label": "About", "href": "about.html" },
-      { "label": "Support", "href": "support.html" },
       { "label": "Donate", "href": "donate.html" },
+      { "label": "Sponsor", "href": "sponsor.html" },
+      { "label": "FAQ", "href": "faq.html" },
       { "label": "Contact", "href": "contact.html" }
     ],
     "legal_statement": "West Sacramento Inclusive Sailing Foundation is a 501(c)(3) nonprofit organization.",

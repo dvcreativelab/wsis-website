@@ -6,9 +6,9 @@
 <title>Sail With Us — West Sacramento Inclusive Sailing Foundation</title>
 <meta name="description" content="Adaptive sailing and access to sailing at West Sacramento Inclusive Sailing Foundation — for sailors of all abilities and backgrounds.">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
-<link rel="stylesheet" href="style.css?v=3">
+<link rel="stylesheet" href="style.css?v=7">
 </head>
-<body>
+<body class="bg-white">
 
 <nav class="site-nav">
   <div class="container">
@@ -20,17 +20,28 @@
   </div>
 </nav>
 
-<section id="sail" style="padding-top:64px;">
+<header class="hero hero-page" id="sail-hero">
   <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Get Involved</span>
+    <div class="section-head" style="margin-bottom:0;">
       <h2 id="sail-headline"></h2>
-      <p class="subhead" id="sail-subhead" style="color:var(--open-water); font-family:var(--font-mono); font-size:1rem;"></p>
+      <p class="subhead" id="sail-subhead"></p>
       <p id="sail-intro"></p>
     </div>
+  </div>
+</header>
 
+<section class="on-white">
+  <div class="container">
+    <div class="photo-framed-wrap">
+      <img id="sail-featured-photo" src="" alt="A sailor out on the water" class="photo-framed">
+    </div>
+  </div>
+</section>
+
+<section class="on-white">
+  <div class="container">
     <div class="block">
-      <div class="side"><span class="telltale" aria-hidden="true"><svg viewBox="0 0 44 14"><path d="M2,7 Q12,2 22,7 T42,7" stroke="#078D87" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>Program</div>
+      <div class="side"><span class="telltale" aria-hidden="true"><svg viewBox="0 0 44 14"><path d="M2,7 Q12,2 22,7 T42,7" stroke="#078D87" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span></div>
       <div class="main">
         <h3 id="sail-adaptive-headline"></h3>
         <p id="sail-adaptive-body"></p>
@@ -39,16 +50,11 @@
         <ul class="req-list" id="sail-adaptive-requirements"></ul>
         <p id="sail-adaptive-closing"></p>
         <div class="cta-row"><a class="btn btn-primary" id="sail-adaptive-cta" href="#"></a></div>
+        <div id="sail-adaptive-video" style="margin-top:24px;"></div>
       </div>
     </div>
 
-    <div class="photo-duo">
-      <img src="assets/adaptive-boarding.jpg" alt="A sailor transferring into an adaptive sailboat with the help of a support person at the dock">
-      <img src="assets/adaptive-cockpit.jpg" alt="Two sailors seated in the cockpit of an adaptive sailboat, geared up and ready to sail">
-    </div>
-
-    <div class="block">
-      <div class="side"><span class="telltale" aria-hidden="true"><svg viewBox="0 0 44 14"><path d="M2,7 Q12,2 22,7 T42,7" stroke="#078D87" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>Access</div>
+    <div class="block block-full">
       <div class="main">
         <h3 id="sail-access-headline"></h3>
         <div id="sail-access-body"></div>
@@ -57,12 +63,10 @@
     </div>
 
     <div class="block">
-      <div class="side"><span class="telltale" aria-hidden="true"><svg viewBox="0 0 44 14"><path d="M2,7 Q12,2 22,7 T42,7" stroke="#078D87" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>Membership</div>
+      <div class="side"></div>
       <div class="main">
         <h3 id="sail-membership-headline"></h3>
-        <p id="sail-membership-body"></p>
-        <p id="sail-membership-adaptive-note"></p>
-        <p id="sail-membership-access-note"></p>
+        <div id="sail-membership-body"></div>
       </div>
     </div>
   </div>
@@ -72,7 +76,6 @@
   <div class="container">
     <div class="photo-banner-wrap">
       <img src="assets/dock-prep.jpg" alt="A group of sailors and volunteers preparing sailboats together at the dock" class="photo-banner">
-      <p class="photo-caption">Getting ready is part of the community.</p>
     </div>
   </div>
 </section>
@@ -124,7 +127,7 @@
   </div>
 </footer>
 
-<script src="script.js?v=2"></script>
-<script src="cookie-consent.js?v=2"></script>
+<script src="script.js?v=6"></script>
+<script src="cookie-consent.js?v=6"></script>
 </body>
 </html>
