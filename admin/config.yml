@@ -2,12 +2,9 @@ backend:
   name: git-gateway
   branch: main
 
-# Where uploaded images are stored in the repo, and the path used in content.json
 media_folder: "uploads"
 public_folder: "/uploads"
 
-# Sheila edits everything through this single "West Sacramento Inclusive Sailing" entry.
-# Every field below maps directly to content.json — nothing here touches the site's code.
 collections:
   - name: "content"
     label: "Website Content"
@@ -22,12 +19,13 @@ collections:
             fields:
               - { label: "Organization Name", name: "org_name", widget: "string" }
               - { label: "Contact Email", name: "email", widget: "string" }
+              - { label: "Donate Link", name: "donate_url", widget: "string", hint: "Your Stripe checkout link (or any hosted donate/payment link). This one field powers every Donate button sitewide." }
               - label: "Navigation Menu"
                 name: "nav"
                 widget: "list"
                 fields:
                   - { label: "Label", name: "label", widget: "string" }
-                  - { label: "Link (leave as # sections)", name: "href", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
 
           - label: "Home — Hero"
             name: "hero"
@@ -47,7 +45,8 @@ collections:
                 widget: "object"
                 fields:
                   - { label: "Button Text", name: "text", widget: "string" }
-                  - { label: "Link", name: "href", widget: "string" }
+                  - { label: "Link (leave blank to use the Donate Link above)", name: "href", widget: "string", required: false }
+              - { label: "Background Video (Google Drive File ID, optional)", name: "video_drive_id", widget: "string", required: false, hint: "If set, this can be used in place of the photo background. Leave blank to use the photo." }
 
           - label: "Home — Feature Blocks"
             name: "home_blocks"
@@ -69,7 +68,7 @@ collections:
                 required: false
                 fields:
                   - { label: "Button Text", name: "text", widget: "string" }
-                  - { label: "Link", name: "href", widget: "string" }
+                  - { label: "Link (leave blank to use the Donate Link)", name: "href", widget: "string", required: false }
               - label: "Secondary Button (optional)"
                 name: "cta_secondary"
                 widget: "object"
@@ -78,13 +77,34 @@ collections:
                   - { label: "Button Text", name: "text", widget: "string" }
                   - { label: "Link", name: "href", widget: "string" }
 
+          - label: "Home — Closing Section"
+            name: "home_closing"
+            widget: "object"
+            fields:
+              - { label: "Headline", name: "headline", widget: "string" }
+              - { label: "Body", name: "body", widget: "text" }
+              - label: "Primary Button"
+                name: "cta_primary"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "text", widget: "string" }
+                  - { label: "Link (leave blank to use the Donate Link)", name: "href", widget: "string", required: false }
+              - label: "Secondary Button"
+                name: "cta_secondary"
+                widget: "object"
+                fields:
+                  - { label: "Button Text", name: "text", widget: "string" }
+                  - { label: "Link", name: "href", widget: "string" }
+
           - label: "Sail Page"
             name: "sail"
             widget: "object"
             fields:
+              - { label: "Hero Photo", name: "hero_image", widget: "image", required: false }
               - { label: "Headline", name: "headline", widget: "string" }
               - { label: "Subheadline", name: "subhead", widget: "string" }
               - { label: "Intro Text", name: "intro", widget: "text" }
+              - { label: "Featured Photo (below hero)", name: "featured_photo", widget: "image", required: false }
               - label: "Adaptive Sailing Block"
                 name: "adaptive"
                 widget: "object"
@@ -101,6 +121,7 @@ collections:
                     fields:
                       - { label: "Button Text", name: "text", widget: "string" }
                       - { label: "Link", name: "href", widget: "string" }
+                  - { label: "Video (Google Drive File ID, optional)", name: "video_drive_id", widget: "string", required: false }
               - label: "Access Sailing Block"
                 name: "access"
                 widget: "object"
@@ -119,8 +140,6 @@ collections:
                 fields:
                   - { label: "Headline", name: "headline", widget: "string" }
                   - { label: "Body", name: "body", widget: "text" }
-                  - { label: "Adaptive Sailor Note", name: "adaptive_note", widget: "text" }
-                  - { label: "Access Sailor Note", name: "access_note", widget: "text" }
               - label: "Closing Block"
                 name: "closing"
                 widget: "object"
@@ -151,12 +170,13 @@ collections:
                 widget: "list"
                 fields:
                   - { label: "Question", name: "question", widget: "string" }
-                  - { label: "Answer", name: "answer", widget: "text" }
+                  - { label: "Answer (HTML links allowed, e.g. <a href=\"...\">text</a>)", name: "answer", widget: "text" }
 
           - label: "About Page"
             name: "about"
             widget: "object"
             fields:
+              - { label: "Hero Photo", name: "hero_image", widget: "image", required: false }
               - { label: "Headline", name: "headline", widget: "string" }
               - { label: "Intro Text", name: "intro", widget: "text" }
               - label: "Mission"
@@ -189,11 +209,13 @@ collections:
                 fields:
                   - { label: "Headline", name: "headline", widget: "string" }
                   - { label: "Body", name: "body", widget: "text" }
+                  - { label: "Photo (optional)", name: "photo", widget: "image", required: false }
 
-          - label: "Support Page"
-            name: "support"
+          - label: "Donate Page"
+            name: "donate"
             widget: "object"
             fields:
+              - { label: "Hero Photo", name: "hero_image", widget: "image", required: false }
               - { label: "Headline", name: "headline", widget: "string" }
               - { label: "Intro Text", name: "intro", widget: "text" }
               - label: "Intro Button"
@@ -201,33 +223,7 @@ collections:
                 widget: "object"
                 fields:
                   - { label: "Button Text", name: "text", widget: "string" }
-                  - { label: "Link", name: "href", widget: "string" }
-              - label: "Gift Impact"
-                name: "gift_impact"
-                widget: "object"
-                fields:
-                  - { label: "Headline", name: "headline", widget: "string" }
-                  - { label: "Intro Line", name: "intro", widget: "string" }
-                  - { label: "Items Funded", name: "items", widget: "list" }
-                  - { label: "Closing Text", name: "closing", widget: "text" }
-                  - label: "Button"
-                    name: "cta"
-                    widget: "object"
-                    fields:
-                      - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link", name: "href", widget: "string" }
-              - label: "Partnership"
-                name: "partner"
-                widget: "object"
-                fields:
-                  - { label: "Headline", name: "headline", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text" }
-                  - label: "Button"
-                    name: "cta"
-                    widget: "object"
-                    fields:
-                      - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link", name: "href", widget: "string" }
+                  - { label: "Link (leave blank to use the Donate Link)", name: "href", widget: "string", required: false }
               - label: "Closing"
                 name: "closing"
                 widget: "object"
@@ -240,14 +236,47 @@ collections:
                     widget: "object"
                     fields:
                       - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link", name: "href", widget: "string" }
+                      - { label: "Link (leave blank to use the Donate Link)", name: "href", widget: "string", required: false }
                   - label: "Secondary Button"
                     name: "cta_secondary"
                     widget: "object"
                     fields:
                       - { label: "Button Text", name: "text", widget: "string" }
                       - { label: "Link", name: "href", widget: "string" }
-              - label: "Sponsors"
+
+          - label: "Sponsor Page"
+            name: "sponsor"
+            widget: "object"
+            fields:
+              - { label: "Hero Photo", name: "hero_image", widget: "image", required: false }
+              - label: "Corporate Sponsorship"
+                name: "corporate"
+                widget: "object"
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string" }
+                  - { label: "Intro", name: "intro", widget: "text" }
+                  - label: "Sponsorship Tiers"
+                    name: "tiers"
+                    widget: "list"
+                    fields:
+                      - { label: "Amount", name: "amount", widget: "string" }
+                      - { label: "Tier Name", name: "name", widget: "string" }
+                      - { label: "Description", name: "body", widget: "text" }
+                  - label: "Button"
+                    name: "cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Button Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+                  - { label: "Custom Sponsorship Note (before link)", name: "custom_note", widget: "string" }
+                  - label: "Custom Sponsorship Link"
+                    name: "custom_cta"
+                    widget: "object"
+                    fields:
+                      - { label: "Link Text", name: "text", widget: "string" }
+                      - { label: "Link", name: "href", widget: "string" }
+                  - { label: "Custom Sponsorship Note (after link)", name: "custom_note_after", widget: "string" }
+              - label: "Our Sponsors"
                 name: "sponsors"
                 widget: "object"
                 fields:
@@ -259,112 +288,17 @@ collections:
                       - { label: "Name", name: "name", widget: "string" }
                       - { label: "Logo Image", name: "logo", widget: "image", required: false, hint: "Upload a logo image. Leave blank to show the sponsor's name as text instead." }
 
-          - label: "Donate Page"
-            name: "donate"
-            widget: "object"
-            fields:
-              - { label: "Headline", name: "headline", widget: "string" }
-              - { label: "Subheadline", name: "subhead", widget: "string" }
-              - { label: "Intro Text", name: "intro", widget: "text" }
-              - { label: "Donate Link", name: "donate_url", widget: "string", hint: "Your Stripe checkout link (or any hosted donate/payment link). This one field powers every Donate button sitewide." }
-              - label: "Individual Giving"
-                name: "individual"
-                widget: "object"
-                fields:
-                  - { label: "Headline", name: "headline", widget: "string" }
-                  - { label: "Intro Line", name: "intro", widget: "string" }
-                  - label: "Giving Tiers"
-                    name: "tiers"
-                    widget: "list"
-                    fields:
-                      - { label: "Amount", name: "amount", widget: "string" }
-                      - { label: "Tier Name", name: "name", widget: "string" }
-                      - { label: "Description", name: "body", widget: "text" }
-                  - label: "Button"
-                    name: "cta"
-                    widget: "object"
-                    fields:
-                      - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link (leave blank to use the Donate Link above)", name: "href", widget: "string", required: false }
-              - label: "Corporate Giving"
-                name: "corporate"
-                widget: "object"
-                fields:
-                  - { label: "Headline", name: "headline", widget: "string" }
-                  - { label: "Intro Line", name: "intro", widget: "text" }
-                  - label: "Giving Tiers"
-                    name: "tiers"
-                    widget: "list"
-                    fields:
-                      - { label: "Amount", name: "amount", widget: "string" }
-                      - { label: "Tier Name", name: "name", widget: "string" }
-                      - { label: "Description", name: "body", widget: "text" }
-                  - label: "Button"
-                    name: "cta"
-                    widget: "object"
-                    fields:
-                      - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link", name: "href", widget: "string" }
-              - label: "Major Gift"
-                name: "major_gift"
-                widget: "object"
-                fields:
-                  - { label: "Headline", name: "headline", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text" }
-                  - label: "Button"
-                    name: "cta"
-                    widget: "object"
-                    fields:
-                      - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link", name: "href", widget: "string" }
-              - label: "Give With Confidence"
-                name: "confidence"
-                widget: "object"
-                fields:
-                  - { label: "Headline", name: "headline", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text" }
-                  - { label: "EIN", name: "ein", widget: "string", hint: "Format: XX-XXXXXXX" }
-                  - { label: "Closing Tagline", name: "tagline", widget: "string" }
-                  - label: "Button"
-                    name: "cta"
-                    widget: "object"
-                    fields:
-                      - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link (leave blank to use the Donate Link above)", name: "href", widget: "string", required: false }
-
           - label: "Contact Page"
             name: "contact"
             widget: "object"
             fields:
+              - { label: "Hero Photo", name: "hero_image", widget: "image", required: false }
               - { label: "Headline", name: "headline", widget: "string" }
               - { label: "Body Text", name: "body", widget: "text" }
               - { label: "Form Headline", name: "form_headline", widget: "string" }
               - { label: "\"I'm interested in\" Options", name: "interest_options", widget: "list" }
               - { label: "Submit Button Label", name: "submit_label", widget: "string" }
-              - label: "Ready to Sail Card"
-                name: "ready_to_sail"
-                widget: "object"
-                fields:
-                  - { label: "Headline", name: "headline", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text" }
-                  - label: "Button"
-                    name: "cta"
-                    widget: "object"
-                    fields:
-                      - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link", name: "href", widget: "string" }
-              - label: "Ready to Support Card"
-                name: "ready_to_support"
-                widget: "object"
-                fields:
-                  - { label: "Headline", name: "headline", widget: "string" }
-                  - { label: "Body", name: "body", widget: "text" }
-                  - label: "Button"
-                    name: "cta"
-                    widget: "object"
-                    fields:
-                      - { label: "Button Text", name: "text", widget: "string" }
-                      - { label: "Link", name: "href", widget: "string" }
+              - { label: "Video (Google Drive File ID, optional)", name: "video_drive_id", widget: "string", required: false, hint: "Shows next to the contact form. Leave blank to leave that space empty." }
 
           - label: "Legal & Cookie Notice"
             name: "legal"
@@ -424,6 +358,7 @@ collections:
               - { label: "Address", name: "address", widget: "string" }
               - { label: "Phone", name: "phone", widget: "string", required: false, hint: "Leave blank to show 'TBD'" }
               - { label: "Email", name: "email", widget: "string" }
+              - { label: "EIN", name: "ein", widget: "string", hint: "Format: XX-XXXXXXX" }
               - label: "Footer Navigation"
                 name: "nav"
                 widget: "list"
@@ -431,7 +366,7 @@ collections:
                   - { label: "Label", name: "label", widget: "string" }
                   - { label: "Link", name: "href", widget: "string" }
               - { label: "501(c)(3) Statement", name: "legal_statement", widget: "string" }
-              - { label: "Instagram Handle", name: "instagram_handle", widget: "string", required: false, hint: "e.g. @westsacinclusivesailing. Leave blank to hide from the footer." }
+              - { label: "Instagram Handle", name: "instagram_handle", widget: "string", required: false, hint: "e.g. @westsacinclusivesailing. Leave blank to hide the icon from the footer." }
               - { label: "Instagram URL", name: "instagram_url", widget: "string", required: false }
               - { label: "Copyright Line", name: "copyright", widget: "string" }
               - label: "Legal Links"
