@@ -273,11 +273,11 @@ p:last-child { margin-bottom: 0; }
    the crop position on wider screens to keep the boat/sailors in frame. */
 @media (min-width: 861px) {
   #home.hero { background-position: center 75%; }
-  #sail-hero.hero { background-position: center 15%; }
-  #about-hero.hero { background-position: center 15%; }
-  #donate-hero.hero { background-position: center 15%; }
-  #contact-hero.hero { background-position: center 15%; }
-  #sponsor-hero.hero { background-position: center 15%; }
+  #sail-hero.hero { background-position: center 70%; }
+  #about-hero.hero { background-position: center 70%; }
+  #donate-hero.hero { background-position: center 85%; }
+  #contact-hero.hero { background-position: center 80%; }
+  #sponsor-hero.hero { background-position: center 80%; }
 }
 /* Page hero variant used on Sail/About/Donate/Sponsor/Contact - a shorter
    banner version of the same treatment, background set per-page via JS */
