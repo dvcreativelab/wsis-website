@@ -314,8 +314,8 @@ section { padding: var(--section-pad) 0; position: relative; }
   border-top: 1px solid rgba(22,35,43,0.1);
 }
 .block:first-of-type { border-top: none; }
-.block.block-full { grid-template-columns: 1fr; }
-.block.block-full .main { max-width: none; }
+.block.block-full { grid-template-columns: 1fr !important; }
+.block.block-full .main { max-width: none !important; margin-left: 0 !important; }
 .block .side {
   font-family: var(--font-mono);
   font-size: 0.85rem;
