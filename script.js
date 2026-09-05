@@ -129,7 +129,7 @@ async function init() {
             </div>` : '');
         return `
           <div class="block block-full block-stacked">
-            ${b.image ? `<img src="${b.image}" alt="" class="block-stacked-image" style="border-radius:36px; overflow:hidden;">` : ''}
+            ${b.image ? `<div style="border-radius:22px; overflow:hidden; margin-bottom:32px;"><img src="${b.image}" alt="" style="width:100%; max-height:500px; height:auto; object-fit:contain; display:block;"></div>` : ''}
             <div class="main">
               <h3>${b.headline}</h3>
               ${b.body.split('\n\n').map(p => `<p>${p}</p>`).join('')}
