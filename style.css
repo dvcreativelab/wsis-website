@@ -340,9 +340,10 @@ section { padding: var(--section-pad) 0; position: relative; }
   height: auto;
   object-fit: contain;
   display: block;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   margin: 0 auto 32px;
 }
+#home-blocks { padding-top: 24px; }
 .block-stacked .main { max-width: none; }
 .block .main { max-width: 560px; }
 
