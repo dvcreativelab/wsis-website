@@ -129,7 +129,7 @@ async function init() {
             </div>` : '');
         return `
           <div class="block block-full block-stacked">
-            ${b.image ? `<div style="border-radius:22px; overflow:hidden; margin-bottom:32px;"><img src="${b.image}" alt="" style="width:100%; max-height:500px; height:auto; object-fit:contain; display:block;"></div>` : ''}
+            ${b.image ? `<div style="border-radius:22px; overflow:hidden; margin:0 auto 32px; width:fit-content; max-width:100%;"><img src="${b.image}" alt="" style="display:block; max-width:100%; max-height:500px; width:auto; height:auto;"></div>` : ''}
             <div class="main">
               <h3>${b.headline}</h3>
               ${b.body.split('\n\n').map(p => `<p>${p}</p>`).join('')}
