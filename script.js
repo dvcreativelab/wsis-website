@@ -128,8 +128,8 @@ async function init() {
               ${b.cta_secondary ? `<a class="btn btn-outline on-light" href="${b.cta_secondary.href}">${b.cta_secondary.text}</a>` : ''}
             </div>` : '');
         return `
-          <div class="block">
-            <div class="side">${b.image ? `<img src="${b.image}" alt="" class="block-side-image">` : `<span class="telltale" aria-hidden="true"><svg viewBox="0 0 44 14"><path d="M2,7 Q12,2 22,7 T42,7" stroke="#078D87" stroke-width="2" fill="none" stroke-linecap="round"/></svg></span>`}</div>
+          <div class="block block-full block-stacked">
+            ${b.image ? `<img src="${b.image}" alt="" class="block-stacked-image">` : ''}
             <div class="main">
               <h3>${b.headline}</h3>
               ${b.body.split('\n\n').map(p => `<p>${p}</p>`).join('')}

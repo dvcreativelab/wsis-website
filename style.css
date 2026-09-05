@@ -333,6 +333,16 @@ section { padding: var(--section-pad) 0; position: relative; }
   display: block;
   border-radius: var(--radius-md);
 }
+.block-stacked { display: block; }
+.block-stacked-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  display: block;
+  border-radius: var(--radius-md);
+  margin-bottom: 32px;
+}
+.block-stacked .main { max-width: none; }
 .block .main { max-width: 560px; }
 
 /* alternate direction on odd blocks - "tacking" left/right rhythm */
