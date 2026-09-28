@@ -5,7 +5,7 @@ and images herself without touching code.
 
 ## How it's built
 
-- `index.html` — Home page. `sail.html`, `faq.html`, `about.html`, `support.html`, `donate.html`, `contact.html` — each their own page now, reached via the top nav
+- `index.html` — Home page. `sail.html`, `about.html`, `donate.html`, `sponsor.html`, `faq.html`, `contact.html` — each their own page now, reached via the top nav
 - `privacy-and-accessibility.html` — legal page. `thank-you.html` — shown after a contact form submission
 - `style.css` / `script.js` / `cookie-consent.js` — shared across every page (don't need to be touched again)
 - `content.json` — **every piece of text and every button link on the site.** This is the file the CMS edits.
@@ -52,7 +52,7 @@ live site updates automatically within a minute or two.
 
 These were left as placeholders in the copy you sent and are editable in `/admin`:
 
-1. **PayPal donate link** — under *Donate Page → PayPal Donate Link*, paste your actual PayPal.me link or hosted donate button URL. This one field powers every Donate button sitewide.
+1. **Donate link** — under *Organization → Donate Link*, paste your Stripe checkout link (or any hosted donate/payment link). This one field powers every Donate button sitewide.
 2. **EIN** — under *Donate Page → Give With Confidence → EIN*. This single field also powers the EIN shown in the site footer, so you only ever need to update it in one place.
 3. **Board Secretary/Treasurer name** — under *About Page → Board of Directors → Members*.
 4. **Phone number** — under *Footer → Phone*, currently shows "TBD" until filled in.
@@ -73,9 +73,32 @@ Also worth a quick confirm: the Sail page references **Lake Washington Sailing C
 1. Go to `yoursite.com/admin`
 2. Log in (first time: check email for the invite link)
 3. Click **Website Content**
-4. Open any section (Home, Sail, About, Support, Donate, Contact, Footer)
+4. Open any section (Home, Sail, About, Donate, Sponsor, FAQ, Contact, Footer)
 5. Edit the text or upload a new image
 6. Click **Publish** — live in a minute or two, no code involved
+
+## Videos (Vimeo)
+
+Several spots on the site can show a Vimeo video, each with a "Video (Vimeo link, optional)" field in `/admin`:
+
+- **Home → Feature Blocks** — each block shows its video instead of its photo when a link is set
+- **Sail Page → Featured Video** — replaces the Featured Photo below the hero
+- **Donate Page → Video** — sits between "Story — Above the Video" and "Story — Below the Video"
+- **Sponsor Page → Video** — sits below the hero, above the sponsorship tiers
+
+Any Vimeo link works, whether numbered (`vimeo.com/123456789`) or named (`vimeo.com/account/video-name`). Clearing the field brings back the photo, or hides the video space where there isn't one. If a video won't show, check its Vimeo privacy setting: **Where can this be embedded?** must be **Anywhere** or include `westsacinclusivesailing.org`.
+
+## Cache-busting version numbers
+
+Every page loads `style.css?v=NN` and `script.js?v=NN`. Whenever either file changes, raise its number on **every** page so browsers fetch the new copy. Current: `style.css?v=28`, `script.js?v=29`.
+
+## SEO basics
+
+- `sitemap.xml` lists every public page; submit `https://westsacinclusivesailing.org/sitemap.xml` in Google Search Console. If a page is ever added or removed, update this file.
+- `robots.txt` lets search engines crawl everything except `/admin/`, and points them to the sitemap.
+- Each page's `<head>` has a canonical link and link-preview tags (Open Graph / Twitter) using `assets/share-image.jpg` (1200×630). These are written directly in the HTML, because link-preview services don't run the site's JavaScript, so they aren't editable in `/admin`.
+- `index.html` includes structured data (schema.org `NGO`) with the org name, logo (`assets/logo-square.png`), contact info, EIN, and Instagram. If the phone, email, or EIN changes in `/admin`, update it here too.
+- `thank-you.html` is marked `noindex` so it stays out of search results.
 
 ## Adding images later (once branding is ready)
 
