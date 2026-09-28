@@ -10,6 +10,19 @@ function setText(id, value) {
   if (el && value !== undefined && value !== null) el.textContent = value;
 }
 
+// Turns any Vimeo link Sheila pastes (regular, unlisted/private, or player
+// link) into an embed URL. Returns null if it doesn't look like a Vimeo link.
+function vimeoEmbedUrl(url) {
+  if (!url) return null;
+  const m = String(url).match(/vimeo\.com\/(?:video\/)?(\d+)(?:\/([a-zA-Z0-9]+))?/);
+  if (!m) return null;
+  const hashMatch = String(url).match(/[?&]h=([a-zA-Z0-9]+)/);
+  const hash = m[2] || (hashMatch && hashMatch[1]);
+  const params = new URLSearchParams({ title: '0', byline: '0', portrait: '0', dnt: '1' });
+  if (hash) params.set('h', hash);
+  return `https://player.vimeo.com/video/${m[1]}?${params.toString()}`;
+}
+
 function setHTML(id, value) {
   const el = document.getElementById(id);
   if (!el || value === undefined || value === null) return;
@@ -129,7 +142,9 @@ async function init() {
             </div>` : '');
         return `
           <div class="block block-full block-stacked">
-            ${b.image ? `<div style="border-radius:22px; overflow:hidden; margin:0 auto 32px; width:fit-content; max-width:100%;"><img src="${b.image}" alt="" style="display:block; max-width:100%; max-height:500px; width:auto; height:auto;"></div>` : ''}
+            ${vimeoEmbedUrl(b.video_url)
+              ? `<div class="block-video"><iframe src="${vimeoEmbedUrl(b.video_url)}" title="${b.headline} (video)" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`
+              : (b.image ? `<div style="border-radius:22px; overflow:hidden; margin:0 auto 32px; width:fit-content; max-width:100%;"><img src="${b.image}" alt="" style="display:block; max-width:100%; max-height:500px; width:auto; height:auto;"></div>` : '')}
             <div class="main">
               <h3>${b.headline}</h3>
               ${b.body.split('\n\n').map(p => `<p>${p}</p>`).join('')}
