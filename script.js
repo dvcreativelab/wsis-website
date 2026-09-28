@@ -44,22 +44,29 @@ function blockMediaHTML(b, i) {
   return blockPhotoHTML(b);
 }
 
-// Named Vimeo links don't contain the video number, so ask Vimeo for it.
-// If the lookup fails, fall back to the block's photo.
+// Puts a Vimeo player inside `el`. Numbered links embed directly; named links
+// (e.g. vimeo.com/account/video-name) are looked up with Vimeo first.
+// If the video can't be found, onFail() runs instead.
+function mountVimeo(el, url, title, onFail) {
+  const direct = vimeoEmbedUrl(url);
+  if (direct) { el.innerHTML = vimeoIframeHTML(direct, title); return; }
+  fetch(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(url)}`)
+    .then(r => { if (!r.ok) throw new Error('Vimeo lookup failed'); return r.json(); })
+    .then(data => {
+      const m = String(data.html || '').match(/player\.vimeo\.com\/video\/(\d+)(?:\?[^"]*?h=([a-zA-Z0-9]+))?/);
+      const id = data.video_id || (m && m[1]);
+      if (!id) throw new Error('No video id');
+      const hash = m && m[2];
+      el.innerHTML = vimeoIframeHTML(vimeoEmbedUrl(`https://vimeo.com/${id}${hash ? '/' + hash : ''}`), title);
+    })
+    .catch(() => { if (onFail) onFail(); });
+}
+
+// Home blocks: resolve any named Vimeo links, falling back to the block's photo.
 function resolveVimeoPlaceholders(container, blocks) {
   container.querySelectorAll('[data-vimeo-pending]').forEach(el => {
     const b = blocks[Number(el.getAttribute('data-vimeo-pending'))];
-    fetch(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(b.video_url)}`)
-      .then(r => { if (!r.ok) throw new Error('Vimeo lookup failed'); return r.json(); })
-      .then(data => {
-        const m = String(data.html || '').match(/player\.vimeo\.com\/video\/(\d+)(?:\?[^"]*?h=([a-zA-Z0-9]+))?/);
-        const id = data.video_id || (m && m[1]);
-        if (!id) throw new Error('No video id');
-        const hash = m && m[2];
-        const src = vimeoEmbedUrl(`https://vimeo.com/${id}${hash ? '/' + hash : ''}`);
-        el.innerHTML = vimeoIframeHTML(src, b.headline);
-      })
-      .catch(() => { el.outerHTML = blockPhotoHTML(b); });
+    mountVimeo(el, b.video_url, b.headline, () => { el.outerHTML = blockPhotoHTML(b); });
   });
 }
 
@@ -301,6 +308,18 @@ async function init() {
     setText('donate-headline', donate.headline);
     setHTML('donate-intro', donate.intro);
     setLink('donate-intro-cta', donate.intro_cta, donateUrl);
+
+    // Optional video between the hero and the closing section
+    const donateVideoSection = document.getElementById('donate-video-section');
+    const donateVideo = document.getElementById('donate-video');
+    if (donateVideoSection && donateVideo) {
+      if (donate.video_url && /vimeo\.com\//.test(donate.video_url)) {
+        donateVideoSection.hidden = false;
+        mountVimeo(donateVideo, donate.video_url, donate.headline, () => { donateVideoSection.hidden = true; });
+      } else {
+        donateVideoSection.hidden = true;
+      }
+    }
 
     setText('donate-closing-headline', donate.closing.headline);
     const closingLines = document.getElementById('donate-closing-lines');

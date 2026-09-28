@@ -178,6 +178,7 @@
 
   "donate": {
     "hero_image": "assets/jims-story-photo.jpg",
+    "video_url": "https://vimeo.com/1230604468",
     "headline": "Put More People at the Helm.",
     "intro": "Your support opens the water to people who may never have imagined sailing was possible.\n\nEvery sailor needs the right opportunity to begin. For some, that also means an adaptive sailboat, specialized equipment, experienced instruction, hands-on assistance, and a safe environment to learn.\n\nYour support makes all of it possible.",
     "intro_cta": { "text": "Donate", "href": "" },
