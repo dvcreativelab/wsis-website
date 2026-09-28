@@ -360,6 +360,13 @@ async function init() {
     const sponsor = content.sponsor;
     setHeroBackground('sponsor-hero', sponsor.hero_image);
 
+    // Optional video below the hero
+    const sponsorVideo = document.getElementById('sponsor-video');
+    if (sponsorVideo && sponsor.video_url && /vimeo\.com\//.test(sponsor.video_url)) {
+      sponsorVideo.hidden = false;
+      mountVimeo(sponsorVideo, sponsor.video_url, sponsor.corporate.headline, () => { sponsorVideo.hidden = true; });
+    }
+
     setText('sponsor-corporate-headline', sponsor.corporate.headline);
     setText('sponsor-corporate-intro', sponsor.corporate.intro);
     renderTiers('sponsor-corporate-tiers', sponsor.corporate.tiers, '#F4A32E');
