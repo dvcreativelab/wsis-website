@@ -23,6 +23,46 @@ function vimeoEmbedUrl(url) {
   return `https://player.vimeo.com/video/${m[1]}?${params.toString()}`;
 }
 
+function vimeoIframeHTML(src, title) {
+  return `<iframe src="${src}" title="${title} (video)" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
+}
+
+function blockPhotoHTML(b) {
+  return b.image ? `<div style="border-radius:22px; overflow:hidden; margin:0 auto 32px; width:fit-content; max-width:100%;"><img src="${b.image}" alt="" style="display:block; max-width:100%; max-height:500px; width:auto; height:auto;"></div>` : '';
+}
+
+// Video if a Vimeo link is set, otherwise the photo.
+function blockMediaHTML(b, i) {
+  if (b.video_url) {
+    const src = vimeoEmbedUrl(b.video_url);
+    if (src) return `<div class="block-video">${vimeoIframeHTML(src, b.headline)}</div>`;
+    if (/vimeo\.com\//.test(b.video_url)) {
+      // Named link (e.g. vimeo.com/account/video-name) — looked up after render
+      return `<div class="block-video" data-vimeo-pending="${i}"></div>`;
+    }
+  }
+  return blockPhotoHTML(b);
+}
+
+// Named Vimeo links don't contain the video number, so ask Vimeo for it.
+// If the lookup fails, fall back to the block's photo.
+function resolveVimeoPlaceholders(container, blocks) {
+  container.querySelectorAll('[data-vimeo-pending]').forEach(el => {
+    const b = blocks[Number(el.getAttribute('data-vimeo-pending'))];
+    fetch(`https://vimeo.com/api/oembed.json?url=${encodeURIComponent(b.video_url)}`)
+      .then(r => { if (!r.ok) throw new Error('Vimeo lookup failed'); return r.json(); })
+      .then(data => {
+        const m = String(data.html || '').match(/player\.vimeo\.com\/video\/(\d+)(?:\?[^"]*?h=([a-zA-Z0-9]+))?/);
+        const id = data.video_id || (m && m[1]);
+        if (!id) throw new Error('No video id');
+        const hash = m && m[2];
+        const src = vimeoEmbedUrl(`https://vimeo.com/${id}${hash ? '/' + hash : ''}`);
+        el.innerHTML = vimeoIframeHTML(src, b.headline);
+      })
+      .catch(() => { el.outerHTML = blockPhotoHTML(b); });
+  });
+}
+
 function setHTML(id, value) {
   const el = document.getElementById(id);
   if (!el || value === undefined || value === null) return;
@@ -133,7 +173,7 @@ async function init() {
 
     const hbContainer = document.getElementById('home-blocks-container');
     if (hbContainer) {
-      hbContainer.innerHTML = content.home_blocks.map(b => {
+      hbContainer.innerHTML = content.home_blocks.map((b, i) => {
         const ctaHTML = b.cta
           ? `<div class="cta-row"><a class="btn btn-primary" href="${b.cta.href || donateUrl}">${b.cta.text}</a></div>`
           : (b.cta_primary ? `<div class="cta-row">
@@ -142,9 +182,7 @@ async function init() {
             </div>` : '');
         return `
           <div class="block block-full block-stacked">
-            ${vimeoEmbedUrl(b.video_url)
-              ? `<div class="block-video"><iframe src="${vimeoEmbedUrl(b.video_url)}" title="${b.headline} (video)" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen loading="lazy"></iframe></div>`
-              : (b.image ? `<div style="border-radius:22px; overflow:hidden; margin:0 auto 32px; width:fit-content; max-width:100%;"><img src="${b.image}" alt="" style="display:block; max-width:100%; max-height:500px; width:auto; height:auto;"></div>` : '')}
+            ${blockMediaHTML(b, i)}
             <div class="main">
               <h3>${b.headline}</h3>
               ${b.body.split('\n\n').map(p => `<p>${p}</p>`).join('')}
@@ -152,6 +190,7 @@ async function init() {
             </div>
           </div>`;
       }).join('');
+      resolveVimeoPlaceholders(hbContainer, content.home_blocks);
     }
 
     // Home closing section (moved here from the old Donate page's top intro, per Sheila's request)
