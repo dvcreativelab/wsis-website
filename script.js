@@ -220,6 +220,18 @@ async function init() {
     const featuredPhoto = document.getElementById('sail-featured-photo');
     if (featuredPhoto && sail.featured_photo) featuredPhoto.src = sail.featured_photo;
 
+    // Optional video in place of the featured photo
+    const featuredPhotoWrap = document.getElementById('sail-featured-photo-wrap');
+    const featuredVideo = document.getElementById('sail-featured-video');
+    if (featuredVideo && sail.featured_video_url && /vimeo\.com\//.test(sail.featured_video_url)) {
+      if (featuredPhotoWrap) featuredPhotoWrap.style.display = 'none';
+      featuredVideo.hidden = false;
+      mountVimeo(featuredVideo, sail.featured_video_url, sail.headline, () => {
+        featuredVideo.hidden = true;
+        if (featuredPhotoWrap) featuredPhotoWrap.style.display = '';
+      });
+    }
+
     setText('sail-adaptive-headline', sail.adaptive.headline);
     setText('sail-adaptive-body', sail.adaptive.body);
     setText('sail-adaptive-gs-headline', sail.adaptive.getting_started_headline);
