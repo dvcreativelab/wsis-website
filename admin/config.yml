@@ -221,6 +221,20 @@ collections:
               - { label: "Headline", name: "headline", widget: "string" }
               - { label: "Intro Text", name: "intro", widget: "text" }
               - { label: "Video (Vimeo link, optional)", name: "video_url", widget: "string", required: false, hint: "Shows below the top section. Leave blank to hide the video." }
+              - label: "Story — Above the Video"
+                name: "story_above"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string", required: false }
+                  - { label: "Body Text", name: "body", widget: "text", required: false, hint: "Leave a blank line between paragraphs. The first paragraph shows slightly larger." }
+              - label: "Story — Below the Video"
+                name: "story_below"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "Headline", name: "headline", widget: "string", required: false }
+                  - { label: "Body Text", name: "body", widget: "text", required: false, hint: "Leave a blank line between paragraphs. Wrap words in <em> and </em> to italicize them." }
               - label: "Intro Button"
                 name: "intro_cta"
                 widget: "object"
