@@ -935,3 +935,19 @@ footer .tagline {
   border: 0;
   display: block;
 }
+
+/* Donate page story section: text above and below the video */
+.donate-story { max-width: 890px; margin: 0 auto; }
+.donate-story .block-video { margin: 0 auto; }
+.donate-story-text { max-width: 720px; }
+.donate-story-text + .block-video { margin-top: 48px; }
+.block-video + .donate-story-text { margin-top: 56px; }
+.donate-story-text h2 { margin-bottom: 0.5em; }
+.donate-story-text h3 { margin-bottom: 0.6em; }
+.donate-story-body p { font-size: 1.08rem; line-height: 1.65; color: rgba(22,35,43,0.78); }
+#donate-story-above .donate-story-body p:first-child {
+  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+  line-height: 1.5;
+  color: var(--ink);
+}
+.donate-story-body em { font-style: italic; color: var(--teal-text); }

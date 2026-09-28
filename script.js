@@ -321,15 +321,29 @@ async function init() {
     setHTML('donate-intro', donate.intro);
     setLink('donate-intro-cta', donate.intro_cta, donateUrl);
 
-    // Optional video between the hero and the closing section
+    // Story section between the hero and the closing section:
+    // text above the video, the video, and text below it. Each piece is optional.
     const donateVideoSection = document.getElementById('donate-video-section');
     const donateVideo = document.getElementById('donate-video');
-    if (donateVideoSection && donateVideo) {
-      if (donate.video_url && /vimeo\.com\//.test(donate.video_url)) {
-        donateVideoSection.hidden = false;
-        mountVimeo(donateVideo, donate.video_url, donate.headline, () => { donateVideoSection.hidden = true; });
-      } else {
-        donateVideoSection.hidden = true;
+    if (donateVideoSection) {
+      const fillStory = (wrapId, headlineId, bodyId, story) => {
+        const wrap = document.getElementById(wrapId);
+        if (!wrap) return false;
+        const has = story && (story.headline || story.body);
+        wrap.hidden = !has;
+        if (has) { setText(headlineId, story.headline || ''); setHTML(bodyId, story.body || ''); }
+        return !!has;
+      };
+      const hasAbove = fillStory('donate-story-above', 'donate-story-above-headline', 'donate-story-above-body', donate.story_above);
+      const hasBelow = fillStory('donate-story-below', 'donate-story-below-headline', 'donate-story-below-body', donate.story_below);
+      const hasVideo = !!(donateVideo && donate.video_url && /vimeo\.com\//.test(donate.video_url));
+      if (donateVideo) donateVideo.hidden = !hasVideo;
+      donateVideoSection.hidden = !(hasAbove || hasBelow || hasVideo);
+      if (hasVideo) {
+        mountVimeo(donateVideo, donate.video_url, donate.headline, () => {
+          donateVideo.hidden = true;
+          if (!hasAbove && !hasBelow) donateVideoSection.hidden = true;
+        });
       }
     }
 

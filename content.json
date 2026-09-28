@@ -180,6 +180,14 @@
   "donate": {
     "hero_image": "assets/jims-story-photo.jpg",
     "video_url": "https://vimeo.com/1230604468",
+    "story_above": {
+      "headline": "How Far Can a Sailor Go?",
+      "body": "A first sail can become a new passion. A new passion can become independence. And sometimes, it can become a dream to race around the world.\n\nAt West Sacramento Inclusive Sailing Foundation, we believe every sailor deserves the opportunity to find out.\n\nYour support puts people on the water, builds skills and creates opportunities for sailors to take the helm and decide for themselves what comes next."
+    },
+    "story_below": {
+      "headline": "Her Goal Is to Race Around the World.",
+      "body": "That’s the thing about opportunity. You never quite know where it might lead. For one sailor, the goal might be getting on a boat for the first time. For another, it might be learning to sail independently.\n\nWe don’t decide how far someone should go. We make sure they have the opportunity to start.\n\nYour donation supports the boats, adaptive equipment, instruction, safety gear and experiences that turn <em>I wonder if I can</em> into <em>I know I can</em>."
+    },
     "headline": "Put More People at the Helm.",
     "intro": "Your support opens the water to people who may never have imagined sailing was possible.\n\nEvery sailor needs the right opportunity to begin. For some, that also means an adaptive sailboat, specialized equipment, experienced instruction, hands-on assistance, and a safe environment to learn.\n\nYour support makes all of it possible.",
     "intro_cta": { "text": "Donate", "href": "" },
