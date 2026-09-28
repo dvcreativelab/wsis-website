@@ -266,6 +266,7 @@ collections:
             widget: "object"
             fields:
               - { label: "Hero Photo", name: "hero_image", widget: "image", required: false }
+              - { label: "Video (Vimeo link, optional)", name: "video_url", widget: "string", required: false, hint: "Shows below the top section. Leave blank to hide the video." }
               - label: "Corporate Sponsorship"
                 name: "corporate"
                 widget: "object"
