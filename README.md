@@ -88,9 +88,17 @@ Several spots on the site can show a Vimeo video, each with a "Video (Vimeo link
 
 Any Vimeo link works, whether numbered (`vimeo.com/123456789`) or named (`vimeo.com/account/video-name`). Clearing the field brings back the photo, or hides the video space where there isn't one. If a video won't show, check its Vimeo privacy setting: **Where can this be embedded?** must be **Anywhere** or include `westsacinclusivesailing.org`.
 
+## Accessibility menu
+
+Every page has an accessibility button in the bottom-right corner (it moves up while the cookie banner is showing). It opens a panel where visitors can change contrast, text size, text spacing, line height, text alignment, and saturation, highlight links, switch to a dyslexia-friendly font, pause animations, hide images, enlarge the cursor, and turn on a reading guide. Choices are saved in the visitor's browser and carry across pages.
+
+- All of it lives in `accessibility-menu.js` — no outside service, no account, no tracking.
+- The dyslexia font is OpenDyslexic (free, SIL Open Font License), stored as `assets/OpenDyslexic-Regular.woff2` and `assets/OpenDyslexic-Bold.woff2`. It only downloads when a visitor turns that option on.
+- It is loaded by the last few lines of `cookie-consent.js`, so any page that loads `cookie-consent.js` gets the menu automatically.
+
 ## Cache-busting version numbers
 
-Every page loads `style.css?v=NN` and `script.js?v=NN`. Whenever either file changes, raise its number on **every** page so browsers fetch the new copy. Current: `style.css?v=28`, `script.js?v=29`.
+Every page loads `style.css?v=NN` and `script.js?v=NN`. Whenever either file changes, raise its number on **every** page so browsers fetch the new copy. Current: `style.css?v=28`, `script.js?v=29`, `accessibility-menu.js?v=1`.
 
 ## SEO basics
 

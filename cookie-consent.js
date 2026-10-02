@@ -95,3 +95,10 @@ async function initCookieConsent() {
 }
 
 document.addEventListener('DOMContentLoaded', initCookieConsent);
+
+// Load the accessibility menu on every page
+(function () {
+  var s = document.createElement('script');
+  s.src = 'accessibility-menu.js?v=1';
+  document.body.appendChild(s);
+})();
