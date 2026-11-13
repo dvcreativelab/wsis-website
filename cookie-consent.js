@@ -102,3 +102,27 @@ document.addEventListener('DOMContentLoaded', initCookieConsent);
   s.src = 'accessibility-menu.js?v=1';
   document.body.appendChild(s);
 })();
+
+// Google Analytics: skipped for visitors who opted out
+(function () {
+  var GA_ID = 'G-PGWNPNJ4'; // <-- replace with your Measurement ID
+  if (GA_ID.indexOf('XXXX') !== -1) return;
+  if (getCookieConsent() === 'optout') return;
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () { window.dataLayer.push(arguments); };
+  gtag('js', new Date());
+  gtag('config', GA_ID);
+
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+  document.head.appendChild(s);
+
+  // If a visitor opts out during their visit, stop tracking right away
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('#cookieSaveBtn')) {
+      window['ga-disable-' + GA_ID] = getCookieConsent() === 'optout';
+    }
+  });
+})();
